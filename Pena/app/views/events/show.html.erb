@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @event.location %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @event.description %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @event.time.strftime("%-l:%M %p") %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date.strftime("%b %d, %Y") %>
+</p>
+
+
+
+<%= link_to 'Back', events_path %>
