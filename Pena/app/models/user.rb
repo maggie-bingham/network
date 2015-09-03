@@ -1,26 +1,29 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  def from_omniauth(auth_hash)
-    user = find_or_create_by(uid: auth_hash['uid'], provider: auth_hash['provider'])
-    user.name = auth_hash['info']['name']
-    user.image_url = auth_hash['info']['image']
-    user.headline = auth_hash['info']['headline']
-    user.industry = auth_hash['info']['industry']
-    user.url = get_url_for user.provider, auth_hash['info']['urls']
-    user.save!
-    user
-  end
 
-  private
-
-  def get_url_for(provider, urls_hash)
-    case provider
-      when 'linkedin'
-        urls_hash['public_profile']
-      else
-        urls_hash[provider.capitalize]
+    def self.from_omniauth(auth)
+      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.image_url = auth.info.image
+      user.save!
+      end
     end
-  end
+
+    def client
+      access_token = request_token.token
+      access_token_secret = request_token.secret
+
+      client = LinkedIn::Client.new
+      client.authorize_from_access(access_token, access_token_secret)
+      client
+    end
+
+    def linkedin_profile
+    end
+
+
+
+
+
+
 
 end
