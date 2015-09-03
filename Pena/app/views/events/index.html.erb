@@ -24,6 +24,7 @@
         <td><%= event.date.strftime("%b %d, %Y") %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Attend' %></td>
       </tr>
     <% end %>
   </tbody>
