@@ -5,16 +5,12 @@ class Event < ActiveRecord::Base
   end
 
   def events
-    meetup_api.categories(params)
+    meetup_api.open_events(HASH)
   end
 
   def details
-    api_response = meetup_api
+    api_response = events()
   end
 
-private
 
-  def categories(params)
-    params.require(:events).permit(:lat, :lon, :city, :state, :name, :description, :picture, :time)
-  end
 end

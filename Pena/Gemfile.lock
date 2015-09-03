@@ -42,13 +42,9 @@ GEM
       json
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-<<<<<<< HEAD
-=======
     bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.3.0)
-    buftok (0.2.0)
->>>>>>> 481ca5f2e7284f76b85f8a4551e5091e6448a32f
     builder (3.2.2)
     byebug (6.0.2)
     coffee-rails (4.1.0)
@@ -59,18 +55,6 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     debug_inspector (0.0.2)
-<<<<<<< HEAD
-    devise (3.5.2)
-      bcrypt (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (>= 3.2.6, < 5)
-      responders
-      thread_safe (~> 0.1)
-      warden (~> 1.2.3)
-=======
-    domain_name (0.5.24)
-      unf (>= 0.0.5, < 1.0.0)
->>>>>>> 481ca5f2e7284f76b85f8a4551e5091e6448a32f
     erubis (2.7.0)
     execjs (2.6.0)
     faraday (0.9.1)
@@ -176,8 +160,6 @@ GEM
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    warden (1.2.3)
-      rack (>= 1.0)
     web-console (2.2.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
