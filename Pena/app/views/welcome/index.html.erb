@@ -1,8 +1,16 @@
-
-<div class="jumbotron">
-  <h1>Welcome to P.E.N.A</h1>
-  <p>The Professional Event Networking App</p>
-  <h3>Authenticate via Linkedin to get started!</h3>
-    <%= link_to image_tag("linkedin-sign-in.png"), '/auth/linkedin' %>
-
-</div>
+<% if current_user %>
+  <div class="profile">
+    <div class-"user-info">
+      <ul>
+        <li><img src="<%= current_user.image_url %>"></li>
+        <li><strong><%= current_user.name %></strong></li>
+        <li><%= current_user.linkedin_profile %></li>
+      </ul>
+    </div>
+  </div>
+  <div class='logout'>
+    <%= link_to "Logout", logout_path, :method => :delete %>
+  </div>
+  <% else %>
+    <%= render 'welcome' %>
+  <% end %>
