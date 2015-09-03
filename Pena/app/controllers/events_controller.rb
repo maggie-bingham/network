@@ -5,11 +5,18 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @event}
+    end
   end
-
   # GET /events/1
   # GET /events/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json { render json: @event}
+    end
   end
 
   # GET /events/new
@@ -71,4 +78,11 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:name, :location, :description, :time, :date)
     end
-end
+
+
+  private
+
+    # def categories(params)
+    #   params.require(:events).permit(:lat, :lon, :city, :state, :name, :description, :picture, :time)
+    # end
+  end
