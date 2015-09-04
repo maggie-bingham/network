@@ -2,18 +2,31 @@ class User < ActiveRecord::Base
 
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
-      where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.access_token = auth.credentials.token
       user.name = auth.info.name
       user.image_url = auth.info.image
+      user.email = auth.extra.raw_info.emailAddress
+      user.industry = auth.extra.raw_info.industry
+      user.headline = auth.extra.raw_info.headline
       user.save!
       user
       end
     end
 
-    def linkedin_profile
-      api = LinkedIn::API.new(@user.access_token)
-      api.profile
+
+
+    def company
+      api = LinkedIn::API.new(access_token)
+      company_hash = api.profile(fields:["id", {"positions" => ["company" => ["name"]]}])
+      comapany_name = company_hash.positions.all[0].company.name
+      company.name
     end
 
+    def title
+      api = LinkedIn::API.new(access_token)
+      title_hash = api.profiel(fields:["id", {"positions" => ["title"]}])
+      title = title_hash.positions.all[0].title
+      title
+    end
 end

@@ -4,12 +4,20 @@
       <ul>
         <li><img src="<%= current_user.image_url %>"></li>
         <li><strong><%= current_user.name %></strong></li>
+        <li><strong><%= current_user.company %></strong></li>
+        <li><strong><<%= current_user.title %></li>
+        <li><strong><%= current_user.email%></strong></li>
+        <li><<%= current_user.industry %></li>
+        <li><%= current_user.headline %></li>
+
       </ul>
     </div>
   </div>
   <div class='logout'>
-    <%= link_to "Logout", logout_path, :method => :delete %>
+    <%= link_to "Logout", logout_path, :method => :delete %><br>
+    <%= link_to "Events", events_path %>
   </div>
   <% else %>
     <%= render 'welcome' %>
+
   <% end %>
