@@ -16,9 +16,17 @@ class User < ActiveRecord::Base
 
 
 
-    def linkedin_profile
+    def company
       api = LinkedIn::API.new(access_token)
-      api.profile
+      company_hash = api.profile(fields:["id", {"positions" => ["company" => ["name"]]}])
+      comapany_name = company_hash.positions.all[0].company.name
+      company.name
     end
 
+    def title
+      api = LinkedIn::API.new(access_token)
+      title_hash = api.profiel(fields:["id", {"positions" => ["title"]}])
+      title = title_hash.positions.all[0].title
+      title
+    end
 end
