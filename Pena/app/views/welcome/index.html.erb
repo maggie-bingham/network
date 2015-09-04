@@ -1,27 +1,23 @@
-<div id="wrapper">
-  <h1>Welcome to Pena</h1>
+<% if current_user %>
+  <div class="profile">
+    <div class-"user-info">
+      <ul>
+        <li><img src="<%= current_user.image_url %>"></li>
+        <li><strong><%= current_user.name %></strong></li>
+        <li><strong><%= current_user.company %></strong></li>
+        <li><strong><<%= current_user.title %></li>
+        <li><strong><%= current_user.email%></strong></li>
+        <li><<%= current_user.industry %></li>
+        <li><%= current_user.headline %></li>
 
-    <%= link_to 'Sign In', user_omniauth_authorize_path(:linkedin)  %>
+      </ul>
+    </div>
+  </div>
+  <div class='logout'>
+    <%= link_to "Logout", logout_path, :method => :delete %><br>
+    <%= link_to "Events", events_path %>
+  </div>
+  <% else %>
+    <%= render 'welcome' %>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
+  <% end %>

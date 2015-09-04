@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal<%= pix.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="myModal<%= user.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= pix.description %> </h4>
+        <h4 class="modal-title" id="myModalLabel"><%= user.description %> </h4>
       </div>
       <div class="modal-body">
         <%= image_tag(user.picture) %>
@@ -13,12 +13,17 @@
         <%= user.company %>
         <%= user.email %>
         <%= user.description %>
-        <%= f.form_group :terms, label: { text: "Optional Label" } do %>
-        <%= f.check_box :terms do %>
-              Met
-            <% end %>
-          <% end %>
-        
+        <%= form_for(@event) do |f| %>
+            <%= f.form_group :terms, label: { text: "Optional Label" } do %>
+            <%= f.check_box :terms do %>
+                  Met
+                <% end %>
+              <% end %>
+
+              <%= f.label :notes %><br>
+              <%= f.text_area :notes %>
+        <%end%>
+
 
       </div>
       <div class="modal-footer">

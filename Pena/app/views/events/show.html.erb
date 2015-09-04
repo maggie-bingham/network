@@ -9,6 +9,18 @@
   <strong>Location:</strong>
   <%= @event.location %>
 </p>
+<p>
+  <strong>City:</strong>
+  <%= @event.city %>
+</p>
+<p>
+  <strong>State:</strong>
+  <%= @event.state %>
+</p>
+<p>
+  <strong>Zip Code:</strong>
+  <%= @event.zipcode %>
+</p>
 
 <p>
   <strong>Description:</strong>
@@ -24,7 +36,4 @@
   <strong>Date:</strong>
   <%= @event.date.strftime("%b %d, %Y") %>
 </p>
-
-
-
 <%= link_to 'Back', events_path %>
