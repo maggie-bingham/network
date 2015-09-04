@@ -18,7 +18,7 @@ gem 'linkedin', '~> 1.0.0'
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-linkedin-oauth2'
 gem 'pg'
-
+gem 'geokit'
 gem 'meetup_client'
 
 

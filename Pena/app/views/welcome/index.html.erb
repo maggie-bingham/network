@@ -9,8 +9,10 @@
     </div>
   </div>
   <div class='logout'>
-    <%= link_to "Logout", logout_path, :method => :delete %>
+    <%= link_to "Logout", logout_path, :method => :delete %><br>
+    <%= link_to "Events", events_path %>
   </div>
   <% else %>
     <%= render 'welcome' %>
+
   <% end %>
