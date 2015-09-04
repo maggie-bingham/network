@@ -7,6 +7,9 @@
     <tr>
       <th>Name</th>
       <th>Location</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip Code</th>
       <th>Description</th>
       <th>Time</th>
       <th>Date</th>
@@ -19,6 +22,9 @@
       <tr>
         <td><%= link_to event.name, event %></td>
         <td><%= event.location %></td>
+        <td><%= event.city %></td>
+        <td><%= event.state %></td>
+        <td><%= event.zipcode %></td>
         <td><%= event.description %></td>
         <td><%= event.time.strftime("%-l:%M %p") %></td>
         <td><%= event.date.strftime("%b %d, %Y") %></td>
@@ -29,6 +35,9 @@
     <% end %>
   </tbody>
 </table>
+
+  <%= @data %>
+
 
 <br>
 
