@@ -1,4 +1,4 @@
 LinkedIn.configure do |config|
-  config.token = ENV['LINKEDIN_KEY']
-  config.secret = ENV['LINKEDIN_SECRET']
+  config.client_id = ENV['LINKEDIN_KEY']
+  config.client_secret = ENV['LINKEDIN_SECRET']
 end
