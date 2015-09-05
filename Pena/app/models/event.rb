@@ -5,7 +5,8 @@ class Event < ActiveRecord::Base
   end
 
   def events
-    meetup_api.open_events()
+    meetup_api = MeetupAPI.new
+    events = meetup_api.categories({})
   end
 
   def details
