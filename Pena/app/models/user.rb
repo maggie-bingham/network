@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
       user.email = auth.extra.raw_info.emailAndress
       user.industy = auth.extra.raw_info.industy
       user.headline = auth.extra.raw_info.headline
+      user.industry = auth.extra.raw_info.industry
       user.save!
       user
       end
@@ -23,8 +24,8 @@ class User < ActiveRecord::Base
     def linkedin_title
       api = LinkedIn::API.new(access_token)
       title_hash = api.profile(fields:["id", {"positions" => ["title"]}])
-      work_title = title_hash.positions.all[0].title
-      work_title
+      title = title_hash.positions.all[0].title
+      title
     end
 
 end
