@@ -1,11 +1,11 @@
 class Event < ActiveRecord::Base
 
-  def meetup_api
+  def meetup
     MeetupApi.new
   end
 
   def events
-    meetup_api.open_events(HASH)
+    meetup_api.open_events()
   end
 
   def details
