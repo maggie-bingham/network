@@ -20,6 +20,7 @@ gem 'omniauth-linkedin-oauth2'
 gem 'pg'
 gem 'geokit'
 gem 'meetup_client'
+gem 'rMeetup'
 
 
 
