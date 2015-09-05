@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
 
   def meetup
     MeetupApi.new
+    Rails.logger.info auth.to_yaml
+
   end
 
   def events

@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @event = 
+    @event =
     @events = Event.all
     respond_to do |format|
       format.html
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    @event = Event.new
 
     respond_to do |format|
       if @event.save
@@ -76,8 +76,8 @@ class EventsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
+    def params
+      params.require(:state).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
     end
 
 
