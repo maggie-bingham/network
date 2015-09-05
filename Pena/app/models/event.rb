@@ -2,10 +2,15 @@ class Event < ActiveRecord::Base
 
   def meetup
     MeetupApi.new
+    Rails.logger.info auth.to_yaml
+
   end
 
   def events
-    meetup_api.open_events()
+    RMeetup::Client.api_key = "MEETUP_KEY"
+    results = RMeetup::Client.fetch(:results)
+
+
   end
 
   def details
