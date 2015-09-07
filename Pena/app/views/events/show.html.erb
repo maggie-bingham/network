@@ -29,11 +29,11 @@
 
 <p>
   <strong>Time:</strong>
-  <%= @event.time.strftime("%-l:%M %p") %>
+  <%= @event.time %>
 </p>
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date.strftime("%b %d, %Y") %>
+  <%= @event.date %>
 </p>
 <%= link_to 'Back', events_path %>
