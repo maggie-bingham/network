@@ -4,12 +4,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.results
-    respond_to do |format|
-      format.html
-      format.json { render json: @event}
+      @events = Event.results
+        respond_to do |format|
+          format.html
+          format.json { render json: @event}
     end
   end
+
   # GET /events/1
   # GET /events/1.json
   def show
@@ -78,15 +79,6 @@ class EventsController < ApplicationController
     def event_params
       params.require(:state).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
     end
-    def param
-      { category: '2',
-        country: 'us',
-        city:   'Indianapolis',
-        state:    'IN',
-        format:   'json'}
-
-    end
-
 
   private
 
