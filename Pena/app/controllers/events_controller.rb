@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.results
     respond_to do |format|
       format.html
       format.json { render json: @event}
@@ -75,8 +75,16 @@ class EventsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def params
+    def event_params
       params.require(:state).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
+    end
+    def param
+      { category: '2',
+        country: 'us',
+        city:   'Indianapolis',
+        state:    'IN',
+        format:   'json'}
+
     end
 
 

@@ -5,24 +5,15 @@
   <div>
 
     <% @events.each do |event| %>
-
-        <%= event.results %>
-        <%= event.events %>
-
-      <ul>
-        <li><%= link_to event.name, event %></li>
-        <li><%= event.location %></li>
-        <li><%= event.city %></li>
-        <li><%= event.state %></li>
-        <li><%= event.zipcode %></li>
-        <li><%= event.description %></li>
-        <li><%= event.time %></li>
-        <li><%= event.date %></li>
-        <li><%= link_to 'Edit', edit_event_path(event) %></li>
-        <li><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-        <li><%= link_to 'Attend' %></li>
-      </ul>
+    <ul>
+      <% event.each do |key, value| %>
+      <%= key %> <%= value %>
+    </ul>
       <% end %>
-<br>
+      <%= link_to 'Attend' %>
+    <% end %>
+
+  </div>
+  <br>
 
 <%= link_to 'New Event', new_event_path %>
