@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
       end
     end
 
-
-
     def company
       api = LinkedIn::API.new(access_token)
       company_hash = api.profile(fields:["id", {"positions" => ["company" => ["name"]]}])
@@ -29,4 +27,5 @@ class User < ActiveRecord::Base
       title = title_hash.positions.all[0].title
       title
     end
+
 end

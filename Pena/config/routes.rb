@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'events/index2'
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
