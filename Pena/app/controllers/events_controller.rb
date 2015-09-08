@@ -4,12 +4,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
-    respond_to do |format|
-      format.html
-      format.json { render json: @event}
+      @events = Event.results
+        respond_to do |format|
+          format.html
+          format.json { render json: @event}
     end
   end
+
   # GET /events/1
   # GET /events/1.json
   def show
@@ -58,6 +59,10 @@ class EventsController < ApplicationController
     end
   end
 
+  def index2
+
+  end
+
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
@@ -75,8 +80,8 @@ class EventsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def params
-      params.require(:state).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
+    def event_params
+      params.require(:description).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
     end
 
 
