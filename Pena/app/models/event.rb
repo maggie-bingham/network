@@ -1,14 +1,9 @@
 class Event < ActiveRecord::Base
 
 
-  def from_meetup
+  
 
-  end
-  def meetup
-    MeetupApi.new
-  end
-
-  def key
+  def self.key
     RMeetup::Client.api_key = "MEETUP_KEY"
     results = RMeetup::Client.fetch(:results)
   end
@@ -17,28 +12,34 @@ class Event < ActiveRecord::Base
   #   api_response = events()
   # end
 
-  def param
+  def self.param
     { category: '2',
                country: 'us',
-               city:   'Indianapolis',
                state:    'IN',
+               city:     'Indianapolis',
                format:   'json'}
 
   end
 
-  def results
-    meetup.open_events(param)["results"]
+  def self.results
+    MeetupApi.new.open_events(param)["results"]
   end
 
-  def events
-   results[0].count
+  def event_name
+
   end
 
-  def categories
-    meetup.categories({})
+  def group_name
   end
 
+  def event_desc
 
+  end
+
+  def venue_name
+    gn = meetup.open_events(param)["results"]
+     gn.find {|x| x['venue']['state']== 'CA'}
+  end
 
 
 end
