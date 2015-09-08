@@ -3,13 +3,9 @@
     <div class-"user-info">
       <ul>
         <li><img src="<%= current_user.image_url %>"></li>
-        <li><%= current_user.name %></li>
-        <li><%= current_user.title %></li>
-        <li><%= current_user.company %></li>
+        <li><strong><%= current_user.name %></strong></li>
         <li><%= current_user.headline %></li>
         <li><%= current_user.email%></li>
-
-
       </ul>
     </div>
   </div>
@@ -20,5 +16,4 @@
   </div>
   <% else %>
     <%= render 'welcome' %>
-
   <% end %>
