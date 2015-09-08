@@ -4,16 +4,17 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results
-        respond_to do |format|
-          format.html
-          format.json { render json: @event}
-    end
+    @events = Event.results
+      respond_to do |format|
+        format.html
+        format.json { render json: @event}
+      end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    @event = Event.find(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @event}
@@ -72,7 +73,7 @@ class EventsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = Event.find(params[:id])
+      @events = Event.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -80,9 +81,4 @@ class EventsController < ApplicationController
       params.require(:state).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
     end
 
-  private
-
-    # def categories(params)
-    #   params.require(:events).permit(:lat, :lon, :city, :state, :name, :description, :picture, :time)
-    # end
   end
