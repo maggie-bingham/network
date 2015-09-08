@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#auth_failure'
-  resources :events
+  resources :events do
+    member do
+      get 'rsvp'
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -11,7 +15,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'events/index2'
-  
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
