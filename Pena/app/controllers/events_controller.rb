@@ -4,12 +4,13 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.all
+      @events = Event.results
         respond_to do |format|
           format.html
           format.json { render json: @event}
     end
   end
+
   # GET /events/1
   # GET /events/1.json
   def show
@@ -31,7 +32,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new 
+    @event = Event.new
 
     respond_to do |format|
       if @event.save
