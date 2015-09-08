@@ -4,15 +4,23 @@
 
   <div>
 
-    <% @events.each do |event| %>
+    <% @events.map do |event| %>
 <ul>
-      <% event.each do |key, value| %>
-         <%= key %><%= value %>
-</ul>
-      <% end %>
-      <%= link_to 'Attend' %>
-    <%end%>
 
+      <li><%= event.slice("venue")%></li>
+      <% event.slice("description").each do |key, value| %>
+      <li><%= strip_tags(value) %></li>
+        <%end%>
+      <li><%= event.slice("event_url")%></li>
+      <li><%= event.slice("group") %></li>
+      <% event.slice("status").each do |key, value| %>
+        <%= value %>
+      <%end%>    
+</ul>
+
+      <%= link_to 'Attend' %>
+
+    <%end%>
 <br>
 
 <%= link_to 'New Event', new_event_path %>
