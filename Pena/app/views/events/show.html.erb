@@ -1,39 +1,24 @@
 <p id="notice"><%= notice %></p>
+ <div>
+   <strong><%= @event.group_name %></strong>
+ </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+ <div>
+   <%= @event.date %>
+ </div>
 
-<p>
-  <strong>Location:</strong>
-  <%= @event.location %>
-</p>
-<p>
-  <strong>City:</strong>
-  <%= @event.city %>
-</p>
-<p>
-  <strong>State:</strong>
-  <%= @event.state %>
-</p>
-<p>
-  <strong>Zip Code:</strong>
-  <%= @event.zipcode %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @event.description %>
-</p>
+ <div>
+   <%= strip_tags(@event.description) %>
+ </div>
 
-<p>
-  <strong>Time:</strong>
-  <%= @event.time %>
-</p>
+ <div>
+   <%= @event.venue_name %></br>
+   <%= @event.address %></br>
+   <%= @event.city %>
+   <%= @event.state %>
+   <%= @event.zipcode %>
+ </div>
 
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
+<%= button_to "Attend"%>
 <%= link_to 'Back', events_path %>

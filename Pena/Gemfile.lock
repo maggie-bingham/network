@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/rexblack/attendable.git
+  revision: 4f70faf1e4be940f2e86262301c11c25a725d661
+  specs:
+    attendable (0.0.3)
+      rails (>= 4.0.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -199,6 +206,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  attendable!
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)

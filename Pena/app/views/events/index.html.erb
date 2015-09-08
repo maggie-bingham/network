@@ -3,26 +3,11 @@
 <h1>Your Events</h1>
   <div>
     <% @events.map do |event| %>
-      <ul>
-      <% event.slice("group").flatten[1].slice("name").each do |key, value|%>
-        <li><strong><%= link_to value, event_path(event["id"]) %></strong></li>
-      <% end %>
-      <% event.slice("description").each do |key, value|%>
-        <li><%= strip_tags(value).truncate(200)%></li>
-      <% end %>
-      <% event.slice("venue").flatten[1].slice("name", "address_1").each do |key, value|%>
-        <li><%= value %></li>
-        <% end %>
-      <% event.slice("venue").flatten[1].slice("city", "state", "zip").each do |key, value|%>
-        <%= value %>
-      <% end %>
-      <% event.slice("event_url").each do |key, value|%>
-        <li><%= link_to value %></li>
-      <% end %>
-      <% event.slice("time").each do |key, value|%>
-        <li><%= Time.at(value/1000).strftime("%B %d, %Y %I:%M %p") %></li>
-      <% end %>
-      </ul>
+    <ul>
+      <li><strong><%= link_to event.group_name, event_path(event["id"])%></strong></li>
+      <li><%= strip_tags(event.description) %></li>
+      <li><%= event.date %></li>
+    </ul>
       <%= link_to 'Attend' %>
       <% end %>
   </div>

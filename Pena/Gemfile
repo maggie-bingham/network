@@ -21,6 +21,7 @@ gem 'pg'
 gem 'geokit-rails'
 gem 'meetup_client'
 gem 'rMeetup'
+gem 'attendable', github: 'rexblack/attendable'
 
 
 
