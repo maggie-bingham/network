@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  has_and_belongs_to_many :users
   acts_as_mappable :default_units => :miles,
                                      :default_formula => :sphere,
                                      :distance_field_name => :distance,
@@ -11,13 +12,8 @@ class Event < ActiveRecord::Base
     results = RMeetup::Client.fetch(:results)
   end
 
-  # def details
-  #   api_response = events()
-  # end
-
-
   def self.param
-    { category: '2',
+    { category: '2 , 21',
       country:  'US',
       state:    'IN',
       city:     'Indianapolis',

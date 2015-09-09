@@ -21,8 +21,7 @@ gem 'pg'
 gem 'geokit-rails'
 gem 'meetup_client'
 gem 'rMeetup'
-gem 'attendable', github: 'rexblack/attendable'
-
+gem 'acts_as_follower', '~> 0.2.1'
 
 
 gem 'figaro', '~> 1.1.1'

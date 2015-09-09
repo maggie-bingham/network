@@ -45,19 +45,11 @@ class EventsController < ApplicationController
     end
   end
 
-  def rsvp
-     # find current_user member
-     event_member = @event.event_members.where(["invitee_id = ?", current_user.id])[0]
-     if event_member
-       event_member.rsvp_status = params[:rsvp_status]
-     end
-     if event_member.save
-       redirect_to @event, notice: 'Status was successfully updated.'
-     else
-       redirect_to @event, notice: 'Status could not be saved.'
-     end
-   end
-
+  def attend
+    @event = Event.find(params[:id])
+    current_user.events << @event
+    redirect_to @event 
+  end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update

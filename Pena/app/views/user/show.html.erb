@@ -1,0 +1,11 @@
+<div class="profile">
+  <div class-"user-info">
+    <ul>
+      <li><img src="<%= @user.image_url %>"></li>
+      <li><strong><%= @user.name %></strong></li>
+      <li><%= @user.headline %></li>
+      <li><%= @user.email%></li>
+      <%= link_to "We've Met", follow_user_path(@user[:id])%>
+    </ul>
+  </div>
+</div>

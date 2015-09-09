@@ -20,5 +20,23 @@
    <%= @event.zipcode %>
  </div>
 
-<%= button_to "Attend"%>
+<%= button_to "Attend Event", attend_event_path(@event.id), :method => :post %>
+
+<div>
+  <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
+  <div>
+  <% @event.users.each do |user| %>
+    <ul>
+      <div>
+        <label><input type ="checkbox" name="association" value="Met"> We Met</label>
+        
+      </div>
+        <li>
+          <%= user.name %>
+        </li>
+    </ul>
+  <% end %>
+  </div>
+</div>
+
 <%= link_to 'Back', events_path %>
