@@ -1,5 +1,20 @@
 class Event < ActiveRecord::Base
-  # acts_as_attendable :event_members, by: :users
+  acts_as_mappable :default_units => :miles,
+                                     :default_formula => :sphere,
+                                     :distance_field_name => :distance,
+                                     :lat_column_name => :lat,
+                                     :lng_column_name => :lon
+
+
+  def self.key
+    RMeetup::Client.api_key = "MEETUP_KEY"
+    results = RMeetup::Client.fetch(:results)
+  end
+
+  # def details
+  #   api_response = events()
+  # end
+
 
   def self.param
     { category: '2',
@@ -22,10 +37,14 @@ class Event < ActiveRecord::Base
         u.city = event["venue"]["city"]
         u.state = event["venue"]["state"]
         u.zipcode = event["venue"]["zip"]
+        u.lat = event["venue"]["lat"]
+        u.lon = event["venue"]["lon"]
         u.save
         u
     end
     events.select(&:persisted?)
+
   end
+
 
 end

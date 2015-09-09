@@ -2,6 +2,7 @@
 
 <h1>Your Events</h1>
   <div>
+
     <% @events.map do |event| %>
     <ul>
       <li><strong><%= link_to event.group_name, event_path(event["id"])%></strong></li>
@@ -11,5 +12,6 @@
       <%= link_to 'Attend' %>
       <% end %>
   </div>
+
 
 <%= link_to 'New Event', new_event_path %>
