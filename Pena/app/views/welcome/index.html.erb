@@ -10,10 +10,21 @@
     </div>
   </div>
   <div class='logout'>
-    <%= link_to "Logout", logout_path, :method => :delete %><br>
-    <%= link_to "Events", events_path %> </br>
-    <%= link_to "Meetup Events", events_index2_path %>
+    <%= link_to "Local Events", events_path %> </br>
   </div>
+  <div>
+    <h3>Your Upcoming Events</h3>
+    <% @user.events.each do |event| %>
+    <ul>
+      <li>
+        <%= link_to event.group_name, event_path(event[:id]) %>
+        <%= event.date %>
+      </li>
+    </ul>
+    <% end %>
+  </div>
+
+<%= link_to "People Met", user_index_path %>
   <% else %>
     <%= render 'welcome' %>
   <% end %>

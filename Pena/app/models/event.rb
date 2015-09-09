@@ -1,8 +1,8 @@
 class Event < ActiveRecord::Base
-  # acts_as_attendable :event_members, by: :users
+  has_and_belongs_to_many :users
 
   def self.param
-    { category: '2',
+    { category: '2 , 21',
       country:  'US',
       state:    'IN',
       city:     'Indianapolis',
