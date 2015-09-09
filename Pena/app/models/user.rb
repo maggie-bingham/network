@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  acts_as_mappable :default_units => :miles,
+                                     :default_formula => :sphere,
+                                     :distance_field_name => :distance,
+                                     :lat_column_name => :lat,
+                                     :lng_column_name => :lon
 
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
@@ -9,7 +14,7 @@ class User < ActiveRecord::Base
       user.email = auth.extra.raw_info.emailAddress
       user.headline = auth.extra.raw_info.headline
       user.industry = auth.extra.raw_info.industry
-      user.save!
+      user.save
       user
       end
     end
