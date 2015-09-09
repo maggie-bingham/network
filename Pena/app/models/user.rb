@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+  acts_as_mappable :default_units => :miles,
+                                    :default_formula => :sphere,
+                                    :distance_field_name => :distance,
+                                    :lat_column_name => :lat,
+                                    :lng_column_name => :lon
+  has_many :notes
+
   has_and_belongs_to_many :events
   acts_as_followable
   acts_as_follower

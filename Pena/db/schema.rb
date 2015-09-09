@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 20150909215551) do
     t.string   "venue_name"
     t.string   "address"
     t.string   "date"
+    t.float    "lon"
+    t.float    "lat"
   end
 
   create_table "events_users", force: :cascade do |t|
@@ -80,6 +82,8 @@ ActiveRecord::Schema.define(version: 20150909215551) do
     t.datetime "updated_at",    null: false
     t.string   "access_token"
     t.string   "access_secret"
+    t.float    "lat"
+    t.float    "lon"
   end
 
   add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
