@@ -54,7 +54,7 @@ class EventsController < ApplicationController
 
   def unattend
     @event = Event.find(params[:id])
-
+    
     redirect_to @event
 
   end

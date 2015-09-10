@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
                                     :lng_column_name => :lon
 
   has_many :notes
-
   has_and_belongs_to_many :events
   acts_as_followable
   acts_as_follower
