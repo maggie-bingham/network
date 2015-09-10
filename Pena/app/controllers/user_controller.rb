@@ -1,8 +1,6 @@
 class UserController < ApplicationController
 
   def index
-    @user= current_user
-    @user.update(user_params)
     @users = User.all
   end
 
@@ -32,10 +30,17 @@ class UserController < ApplicationController
       end
   end
 
+  def update
+    @user.update(user_params)
+      respond_to do |format|
+        format.js {}
+      end
+  end
+
   private
 
   def user_params
-    params.require(:users).permit(:lat, :lon, :access_token, :name, :image_url, :email, :headline, :industry, :company, :title)
+    params.require(:user).permit(:lat, :lon, :access_token, :name, :image_url, :email, :headline, :industry, :company, :title)
   end
 
 end
