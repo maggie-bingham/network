@@ -48,7 +48,7 @@ class EventsController < ApplicationController
   def attend
     @event = Event.find(params[:id])
     current_user.events << @event
-    redirect_to @event 
+    redirect_to @event
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -86,9 +86,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-
       params.permit(:id, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
-
     end
 
 

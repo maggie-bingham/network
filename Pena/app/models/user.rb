@@ -5,15 +5,14 @@ class User < ActiveRecord::Base
                                     :lat_column_name => :lat,
                                     :lng_column_name => :lon
   has_many :notes
-
   has_and_belongs_to_many :events
-  acts_as_followable
-  acts_as_follower
-  belongs_to :followable, :class_name => 'Follow', :polymorphic => true
-  belongs_to :follower, :class_name => 'Follow', :polymorphic => true
-  has_many :follows, :through => :passive_follows, :as => :followable_id
-  has_many :followers, :through => :active_follows, :as => :follower_id
-
+  # acts_as_followable
+  # acts_as_follower
+  # belongs_to :followable, :class_name => 'Follow', :polymorphic => true
+  # belongs_to :follower, :class_name => 'Follow', :polymorphic => true
+  # has_many :follows, :through => :passive_follows, :as => :followable_id
+  # has_many :followers, :through => :active_follows, :as => :follower_id
+  #
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
       where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|

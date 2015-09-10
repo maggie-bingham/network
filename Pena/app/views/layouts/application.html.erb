@@ -6,13 +6,13 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body<%= " id='user-#{current_user.id}'".html_safe if current_user %>>
   <nav class="navbar navbar-inverse">
   <div class="container">
     <div class="navbar-header">
       <%= link_to 'P.E.N.A', root_path, class: 'navbar-brand' %>
       <%= link_to "logout", logout_path, :method => :delete %>
-    
+
     </div>
     <div id="navbar">
       <ul class="nav navbar-nav">
@@ -31,6 +31,5 @@
 
   <%= yield %>
 </div>
-
 </body>
 </html>
