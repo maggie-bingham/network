@@ -39,7 +39,6 @@ class Event < ActiveRecord::Base
         u
     end
     events.select(&:persisted?)
-
   end
 
 

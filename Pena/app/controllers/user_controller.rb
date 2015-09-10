@@ -10,7 +10,7 @@ class UserController < ApplicationController
   end
 
   def follow
-  @user = User.find(params[:id])
+    @user = User.find(params[:id])
     if @user.cannot_follow?(@user)
       respond_to do |format|
         format.html {redirect_to :back, :notice => "You can't follow this user."}
@@ -21,7 +21,7 @@ class UserController < ApplicationController
         format.js {}
       end
     end
-end
+  end
 
   def unfollow
     @user = User.find(params[:id])
@@ -31,6 +31,18 @@ end
       end
   end
 
+  def update
+    @user.update(user_params)
+      respond_to do |format|
+        format.js {}
+      end
+  end
 
+
+  private
+
+  def user_params
+    params.require(:user).permit(:lat, :lon, :access_token, :name, :image_url, :email, :headline, :industry, :company, :title)
+  end
 
 end
