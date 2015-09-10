@@ -13,7 +13,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.param
-    { category: '2 , 21',
+    { category: '2',
       country:  'US',
       state:    'IN',
       city:     'Indianapolis',
@@ -39,7 +39,6 @@ class Event < ActiveRecord::Base
         u
     end
     events.select(&:persisted?)
-
   end
 
 
