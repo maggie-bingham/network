@@ -8,6 +8,7 @@ class EventsController < ApplicationController
         respond_to do |format|
           format.html
           format.json { render json: @event}
+      @note = Note.new
     end
   end
 
@@ -48,7 +49,14 @@ class EventsController < ApplicationController
   def attend
     @event = Event.find(params[:id])
     current_user.events << @event
-    redirect_to @event 
+    redirect_to @event
+  end
+
+  def unattend
+    @event = Event.find(params[:id])
+
+    redirect_to @event
+
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -64,9 +72,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def index2
-
-  end
 
   # DELETE /events/1
   # DELETE /events/1.json

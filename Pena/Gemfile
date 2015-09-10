@@ -22,6 +22,7 @@ gem 'geokit-rails'
 gem 'meetup_client'
 gem 'rMeetup'
 gem 'acts_as_follower', '~> 0.2.1'
+gem 'geocoder'
 
 
 gem 'figaro', '~> 1.1.1'

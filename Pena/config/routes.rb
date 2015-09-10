@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :events do
     member do
       post :attend
+      post :unattend
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

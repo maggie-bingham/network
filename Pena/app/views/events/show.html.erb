@@ -20,7 +20,13 @@
    <%= @event.zipcode %>
  </div>
 
+<div id =" btn-info">
+  <% if current_user.following?(@event) %>
 <%= button_to "Attend Event", attend_event_path(@event.id), :method => :post %>
+  <% else %>
+    <%= button_to "Unattend Event", unattend_event_path(@event.id) %>
+  <%end%>
+</div>
 
 <div>
   <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
@@ -29,10 +35,12 @@
     <ul>
       <div>
         <label><input type ="checkbox" name="association" value="Met"> We Met</label>
-        
+
       </div>
         <li>
           <%= user.name %>
+          <%= button_to "Notes", "#",  data: { toggle: "modal", target: "#ajax-modal" } %>
+          <%= render :partial => "user/myModal", :locals => {:user => user} %>
         </li>
     </ul>
   <% end %>

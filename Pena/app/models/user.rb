@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
                                     :distance_field_name => :distance,
                                     :lat_column_name => :lat,
                                     :lng_column_name => :lon
+
   has_many :notes
 
   has_and_belongs_to_many :events
@@ -13,6 +14,7 @@ class User < ActiveRecord::Base
   belongs_to :follower, :class_name => 'Follow', :polymorphic => true
   has_many :follows, :through => :passive_follows, :as => :followable_id
   has_many :followers, :through => :active_follows, :as => :follower_id
+
 
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
@@ -41,5 +43,7 @@ class User < ActiveRecord::Base
       title = title_hash.positions.all[0].title
       title
     end
+
+
 
 end
