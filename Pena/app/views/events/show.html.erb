@@ -21,11 +21,9 @@
  </div>
 
 <div id =" btn-info">
-  <% if current_user.following?(@event) %>
-<%= button_to "Attend Event", attend_event_path(@event.id), :method => :post %>
-  <% else %>
-    <%= button_to "Unattend Event", unattend_event_path(@event.id) %>
-  <%end%>
+
+  <%= link_to(@event.is_attending?(current_user) ? "Refuse" : "Attend", rsvp_event_path(@event, {rsvp_status: @event.is_attending?(current_user) ? :declined : :attending})) %>
+
 </div>
 
 <div>
@@ -35,7 +33,6 @@
     <ul>
       <div>
         <label><input type ="checkbox" name="association" value="Met"> We Met</label>
-
       </div>
         <li>
           <%= user.name %>

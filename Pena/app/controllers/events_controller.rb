@@ -4,11 +4,10 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results
+      @events = Event.results(current_user.lat, current_user.lon)
         respond_to do |format|
           format.html
           format.json { render json: @event}
-      @note = Note.new
     end
   end
 
@@ -34,6 +33,7 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    @event.event_members.build({invitee: current_user, rsvp_status: :attending})
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -49,7 +49,7 @@ class EventsController < ApplicationController
   def attend
     @event = Event.find(params[:id])
     current_user.events << @event
-    redirect_to @event
+    @event.save
   end
 
   def unattend
@@ -82,6 +82,23 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def rsvp
+    event_member = @event.event_members.where(["invitee_id = ?", current_user.id])[0]
+    if event_member
+      event_member.rsvp_status = params[:rsvp_status]
+    else
+      event_member = @event.event_members.build({invitee: current_user, rsvp_status: :attending})
+    end
+    if event_member.save
+      redirect_to @event, notice: 'Status was successfully updated.'
+    else
+      redirect_to @event, notice: 'Status could not be saved.'
+    end
+
+
+end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
