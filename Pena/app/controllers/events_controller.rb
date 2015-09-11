@@ -4,17 +4,16 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results
-        respond_to do |format|
-          format.html
-          format.json { render json: @event}
+    @events = Event.results(current_user.lat, current_user.lon)
+      respond_to do |format|
+        format.html
+        format.json { render json: @event}
     end
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
-
     respond_to do |format|
       format.html
       format.json { render json: @event}
@@ -44,6 +43,29 @@ class EventsController < ApplicationController
       end
     end
   end
+
+  def follow
+    @event = Event.find(params[:id])
+    if @user.cannot_follow?(@event)
+      respond_to do |format|
+        format.html {redirect_to :back, :notice => "You already plan on attending"}
+      end
+    else
+      current_user.follow(@user)
+      respond_to do |format|
+        format.js {}
+      end
+    end
+  end
+
+  def unfollow
+    @user = User.find(params[:id])
+    current_user.stop_following(@user)
+      respond_to do |format|
+        format.js{}
+      end
+  end
+
 
   def attend
     @event = Event.find(params[:id])
@@ -86,7 +108,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.permit(:id, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
+      params.require(:events).permit(:id, :lat, :lon, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
     end
 
 

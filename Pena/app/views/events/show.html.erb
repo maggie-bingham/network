@@ -28,8 +28,10 @@
   <% @event.users.each do |user| %>
     <ul>
       <div>
-        <label><input type ="checkbox" name="association" value="Met"> We Met</label>
-        
+        <% if current_user != user && current_user.following?(user) %>
+        <% else %>
+          <%= button_to "We Met", follow_path(user: user), :class => "btn btn-primary btn-sm", :method => :post %>
+        <% end %>
       </div>
         <li>
           <%= user.name %>

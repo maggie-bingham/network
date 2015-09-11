@@ -8,6 +8,7 @@
       <li><strong><%= link_to event.group_name, event_path(event["id"])%></strong></li>
       <li><%= strip_tags(event.description) %></li>
       <li><%= event.date %></li>
+      <li><%= @user_lat %></li>
     </ul>
       <%= link_to 'Attend' %>
       <% end %>
