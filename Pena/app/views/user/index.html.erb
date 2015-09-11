@@ -1,5 +1,5 @@
 <div>
-  <% @users.each do |user| %>
+  <% current_user.all_following.each do |user| %>
   <ul>
     <li><%= link_to user.name, user_path(user[:id]) %></li>
   </ul>

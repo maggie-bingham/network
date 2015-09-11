@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#auth_failure'
   resources :user do
     member do
-      get  :follow
-      get  :unfollow
       post :follow
       post :unfollow
       get  :following
@@ -15,7 +13,8 @@ Rails.application.routes.draw do
   end
   resources :events do
     member do
-      get 'rsvp'
+      post :attend
+      post :unattend
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

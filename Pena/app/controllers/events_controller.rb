@@ -32,7 +32,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event.event_members.build({invitee: current_user, rsvp_status: :attending})
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -45,40 +44,16 @@ class EventsController < ApplicationController
     end
   end
 
-  def follow
-    @event = Event.find(params[:id])
-    if @user.cannot_follow?(@event)
-      respond_to do |format|
-        format.html {redirect_to :back, :notice => "You already plan on attending"}
-      end
-    else
-      current_user.follow(@user)
-      respond_to do |format|
-        format.js {}
-      end
-    end
-  end
-
-  def unfollow
-    @user = User.find(params[:id])
-    current_user.stop_following(@user)
-      respond_to do |format|
-        format.js{}
-      end
-  end
-
-
   def attend
     @event = Event.find(params[:id])
-    current_user.events << @event
-    @event.save
+    @event.users << current_user
+      redirect_to @event
   end
 
   def unattend
     @event = Event.find(params[:id])
-
+    @event.users.delete(current_user)
     redirect_to @event
-
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
