@@ -1,3 +1,4 @@
+
 window.onload = function() {
     if ((navigator.geolocation) && ($('body').attr('id') != undefined)) {
       navigator.geolocation.watchPosition(function(position) {

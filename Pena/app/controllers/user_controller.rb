@@ -1,4 +1,5 @@
 class UserController < ApplicationController
+  before_action
 
   def index
     @users = User.all
@@ -10,21 +11,12 @@ class UserController < ApplicationController
 
   def follow
     @user = User.find(params[:id])
-    if @user.cannot_follow?(@user)
-      respond_to do |format|
-        format.html {redirect_to :back, :notice => "You can't follow this user."}
-      end
-    else
-      current_user.follow(@user)
-      respond_to do |format|
-        format.js {}
-      end
-    end
+    current_user.follow(@event)
   end
 
   def unfollow
     @user = User.find(params[:id])
-    current_user.stop_following(@user)
+    current_user.stop_following(@event)
       respond_to do |format|
         format.js{}
       end
@@ -35,6 +27,7 @@ class UserController < ApplicationController
     @user.update(user_params)
     redirect_to @user
   end
+
 
   private
 

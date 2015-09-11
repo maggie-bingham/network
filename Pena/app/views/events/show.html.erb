@@ -20,7 +20,11 @@
    <%= @event.zipcode %>
  </div>
 
-<%= button_to "Attend Event", attend_event_path(@event.id), :method => :post %>
+<div id =" btn-info">
+
+  <%= link_to(@event.is_attending?(current_user) ? "Refuse" : "Attend", rsvp_event_path(@event, {rsvp_status: @event.is_attending?(current_user) ? :declined : :attending})) %>
+
+</div>
 
 <div>
   <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
@@ -28,13 +32,12 @@
   <% @event.users.each do |user| %>
     <ul>
       <div>
-        <% if current_user != user && current_user.following?(user) %>
-        <% else %>
-          <%= button_to "We Met", follow_path(user: user), :class => "btn btn-primary btn-sm", :method => :post %>
-        <% end %>
+        <label><input type ="checkbox" name="association" value="Met"> We Met</label>
       </div>
         <li>
           <%= user.name %>
+          <%= button_to "Notes", "#",  data: { toggle: "modal", target: "#ajax-modal" } %>
+          <%= render :partial => "user/myModal", :locals => {:user => user} %>
         </li>
     </ul>
   <% end %>

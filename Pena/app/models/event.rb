@@ -1,5 +1,7 @@
 class Event < ActiveRecord::Base
-  acts_as_followable
+  has_many :event_members, :as => :attendable
+  has_many :users, :through => :event_members, :source => :invitable, :source_type => "User"
+
   acts_as_mappable :default_units => :miles,
                                      :default_formula => :sphere,
                                      :distance_field_name => :distance,
@@ -12,11 +14,12 @@ class Event < ActiveRecord::Base
     results = RMeetup::Client.fetch(:results)
   end
 
-  def self.param(lat, lon)
-    { category: '2',
-      lat: lat,
-      lon: lon,
-      radius: '50',
+  def self.param(lat,lon)
+
+      { category: '2',
+      lat:  lat,
+      lon:  lon,
+      radius: '20',
       format:   'json'}
   end
 
@@ -39,6 +42,7 @@ class Event < ActiveRecord::Base
         u
     end
     events.select(&:persisted?)
+
   end
 
 
