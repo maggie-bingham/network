@@ -5,13 +5,10 @@
 
     <% @events.map do |event| %>
     <ul>
-      <li><strong><%= link_to event.group_name, event_path(event["id"])%></strong></li>
-      <li><%= strip_tags(event.description) %></li>
-      <li><%= event.date %></li>
+      <strong><%= link_to event.group_name, event_path(event["id"])%></strong>
+      <%= strip_tags(event.description) %>
+      <%= event.date %> 
     </ul>
-      <%= link_to 'Attend' %>
+
       <% end %>
   </div>
-
-
-<%= link_to 'New Event', new_event_path %>
