@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   end
   resources :events do
     member do
-      get 'rsvp'
+      post :attend
+      post :unattend
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

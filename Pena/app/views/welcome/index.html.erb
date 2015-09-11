@@ -6,13 +6,10 @@
         <li><strong><%= current_user.name %></strong></li>
         <li><%= current_user.headline %></li>
         <li><%= current_user.email %></li>
-        <li><%= current_user.title %></li>
-        <li><%= current_user.company %></li>
-
-
       </ul>
     </div>
   </div>
+
   <div class='LocalEvent'>
     <h3><%= link_to "Local Events", events_path %> </br></h3>
   </div>
@@ -28,6 +25,10 @@
     <% end %>
   </div>
 
+  <div>
+    <h3>Your Past Events</h3>
+
+  </div>  
 
 <h3><%= link_to "People Met", user_index_path %></h3>
   <% else %>

@@ -21,27 +21,33 @@
  </div>
 
 <div id =" btn-info">
-
-  <%= link_to(@event.is_attending?(current_user) ? "Refuse" : "Attend", rsvp_event_path(@event, {rsvp_status: @event.is_attending?(current_user) ? :declined : :attending})) %>
+ <% if @event.users.include? current_user %>
+ <%= button_to "Unattend Event", unattend_event_path(@event.id), :method => :post %>
+ <% else %>
+ <%= button_to "Attend Event", attend_event_path(@event.id), :method => :post %>
+ <% end %>
 
 </div>
 
 <div>
   <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
-  <div>
   <% @event.users.each do |user| %>
+   <%if current_user.following?(user) %>
+    <%= button_to "Didnt Meet", unfollow_user_path, method: :post %>
+   <% else %>
+    <%= button_to "We Met", follow_user_path, method: :post %>
+   <% end %>    
     <ul>
-      <div>
-        <label><input type ="checkbox" name="association" value="Met"> We Met</label>
-      </div>
         <li>
+          <img src="<%= current_user.image_url %>"><br>
           <%= user.name %>
           <%= button_to "Notes", "#",  data: { toggle: "modal", target: "#ajax-modal" } %>
           <%= render :partial => "user/myModal", :locals => {:user => user} %>
+          <label><input type ="checkbox" name="association" value="Met"> We Met</label>
         </li>
     </ul>
   <% end %>
-  </div>
+
 </div>
 
 <%= link_to 'Back', events_path %>

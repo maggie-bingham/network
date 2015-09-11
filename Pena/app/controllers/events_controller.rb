@@ -14,7 +14,6 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-
     respond_to do |format|
       format.html
       format.json { render json: @event}
@@ -33,7 +32,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event.event_members.build({invitee: current_user, rsvp_status: :attending})
     @event = Event.new(event_params)
     respond_to do |format|
       if @event.save
@@ -48,13 +46,14 @@ class EventsController < ApplicationController
 
   def attend
     @event = Event.find(params[:id])
-    current_user.events << @event
-    @event.save
+    @event.users << current_user
+    @event.save!
+      redirect_to @event
   end
 
   def unattend
     @event = Event.find(params[:id])
-
+    
     redirect_to @event
 
   end
