@@ -24,13 +24,12 @@ class Event < ActiveRecord::Base
   end
 
   def self.results(lat, lon)
-
     event_data = MeetupApi.new.open_events(param(lat, lon))["results"]
     events = event_data.map do |event|
-        u = Event.new
+        u = Event.find_or_initialize_by(:external_id => event["id"])
         u.external_id = event["id"]
         u.group_name = event["group"]["name"]
-        u.date = Time.at(event["time"]/1000).strftime("%B %d, %Y %I:%M %p").to_s
+        u.date = Time.at(event["time"]/1000)
         u.description = event["description"]
         u.venue_name = event["venue"]["name"]
         u.address = event["venue"]["address_1"]

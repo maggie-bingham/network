@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-  before_action
 
   def index
     @users = User.all
@@ -11,15 +10,14 @@ class UserController < ApplicationController
 
   def follow
     @user = User.find(params[:id])
-    current_user.follow(@event)
+    current_user.follow(@user)
+    redirect_to :back
   end
 
   def unfollow
     @user = User.find(params[:id])
-    current_user.stop_following(@event)
-      respond_to do |format|
-        format.js{}
-      end
+    current_user.stop_following(@user)
+    redirect_to :back
   end
 
   def update
