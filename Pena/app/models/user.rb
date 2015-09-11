@@ -6,6 +6,10 @@ class User < ActiveRecord::Base
                                     :lng_column_name => :lon
 
   has_many :notes
+
+  acts_as_followable
+  acts_as_follower
+
   has_and_belongs_to_many :events
   has_many :event_members, :as => :invitable
   has_many :events, :through => :event_members, :source => :attendable, :source_type => "Event"

@@ -4,10 +4,10 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results(current_user.lat, current_user.lon)
-        respond_to do |format|
-          format.html
-          format.json { render json: @event}
+    @events = Event.results(current_user.lat, current_user.lon)
+      respond_to do |format|
+        format.html
+        format.json { render json: @event}
     end
   end
 
@@ -47,15 +47,15 @@ class EventsController < ApplicationController
   def attend
     @event = Event.find(params[:id])
     @event.users << current_user
+
     @event.save!
       redirect_to @event
   end
 
   def unattend
     @event = Event.find(params[:id])
-    
+    @event.users.delete(current_user)
     redirect_to @event
-
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
@@ -107,7 +107,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.permit(:id, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
+      params.require(:events).permit(:id, :lat, :lon, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
     end
 
 

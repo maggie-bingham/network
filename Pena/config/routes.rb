@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#auth_failure'
   resources :user do
     member do
-      get :follow
-      get :unfollow
+      post :follow
+      post :unfollow
+      get  :following
     end
   end
   resources :events do
