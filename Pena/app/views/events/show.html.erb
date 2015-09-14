@@ -32,26 +32,7 @@
 
 <div>
   <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
-  <% @event.users.each do |user| %>
-      <div>
-        <% if current_user.following?(user) %>
-          <%= button_to "Didn't Meet", unfollow_user_path(:id => user[:id]), method: :post %>
-        <% else %>
-          <%= button_to "We Met", follow_user_path(:id => user[:id]), method: :post %>
-        <% end %>
-      </div>
-      <ul>
-
-        <li>
-          <img src="<%= current_user.image_url %>"><br>
-          <%= user.name %>
-          <%= button_to "Notes", "#",  data: { toggle: "modal", target: "#ajax-modal" } %>
-          <%= render :partial => "user/myModal", :locals => {:user => user} %>
-          <label><input type ="checkbox" name="association" value="Met"> We Met</label>
-        </li>
-    </ul>
-  <% end %>
-
+      <%= render 'shared/user' %>
 </div>
 
 <%= link_to 'Back', events_path %>

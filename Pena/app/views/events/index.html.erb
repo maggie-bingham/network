@@ -6,9 +6,10 @@
     <% @events.map do |event| %>
     <ul>
       <strong><%= link_to event.group_name, event_path(event["id"])%></strong>
-      <%= strip_tags(event.description) %>
-      <%= event.date %>
+      <%= strip_tags(event.description) %><br>
+      <%= event.date.strftime("%B %d, %Y %I:%M %p") %>
     </ul>
 
       <% end %>
+
   </div>

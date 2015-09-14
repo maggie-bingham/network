@@ -15,10 +15,10 @@ class Event < ActiveRecord::Base
   end
 
   def self.param(lat,lon)
-      { category: '2',
+      { category: '5',
       lat:  lat,
       lon:  lon,
-      radius: '20',
+      radius: '5',
       format:   'json'}
   end
 
@@ -41,6 +41,11 @@ class Event < ActiveRecord::Base
         u
     end
     events.select(&:persisted?)
+
+  end
+
+  def categories
+    cat = MeetupApi.new.categories({})["results"]
 
   end
 

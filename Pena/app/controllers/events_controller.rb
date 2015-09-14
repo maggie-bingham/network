@@ -94,10 +94,7 @@ class EventsController < ApplicationController
     else
       redirect_to @event, notice: 'Status could not be saved.'
     end
-
-
-end
-
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

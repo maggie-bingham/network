@@ -1,10 +1,13 @@
 <div class="profile">
   <div class-"user-info">
     <ul>
-      <li><img src="<%= @user.image_url %>"></li>
-      <li><strong><%= @user.name %></strong></li>
-      <li><%= @user.headline %></li>
-      <li><%= @user.email%></li>
+      <img src="<%= @user.image_url %>">
+      <strong><%= @user.name %></strong>
+      <%= @user.headline %>
+      <%= @user.email%>
+      <%= @user.title %>
+      <%= @user.company %>
+
       <div>
         <% if current_user.following?(@user) %>
           <%= button_to "Didn't Meet", unfollow_user_path, method: :post %>

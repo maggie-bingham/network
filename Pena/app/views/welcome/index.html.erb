@@ -2,10 +2,13 @@
   <div class="profile">
     <div class-"user-info">
       <ul>
-        <li><img src="<%= current_user.image_url %>"></li>
-        <li><strong><%= current_user.name %></strong></li>
-        <li><%= current_user.email %></li>
-        <li><%= current_user.headline %></li>
+        <img src="<%= current_user.image_url %>"><br>
+        <strong><%= current_user.name %></strong><br>
+        <%= current_user.email %><br>
+        <%= current_user.headline %><br>
+        <%= current_user.title %><br>
+        <%= current_user.company %><br>
+
       </ul>
     </div>
   </div>
@@ -34,3 +37,11 @@
   <% else %>
     <%= render 'welcome' %>
   <% end %>
+
+
+<div class = "modal fade" id="myModal" tabindex = "-1" role="dialog" aria-labelby="myModalLable" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+  </div>

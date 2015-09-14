@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
                                     :lng_column_name => :lon
 
   has_many :notes
+  has_many :authored_notes, :class_name => "Note", :foreign_key => "author_id"
 
   acts_as_followable
   acts_as_follower

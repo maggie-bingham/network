@@ -1,6 +1,18 @@
 class NotesController < ApplicationController
 
-  def create
-    @note = Note.new(note_params)
-    @note.author = current_user.id
+  def new
+    @notes = Note.new
+    respond_to do |format|
+          format.html { }
+          format.js { }
+     end
+  end
+
+   def index
+     @notes = Note.where(user_id: user_id)
+   end
+
+   def create
+
+   end
 end
