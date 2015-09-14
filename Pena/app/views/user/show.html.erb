@@ -1,0 +1,16 @@
+<div class="profile">
+  <div class-"user-info">
+    <ul>
+      <li><img src="<%= @user.image_url %>"></li>
+      <li><strong><%= @user.name %></strong></li>
+      <li><%= @user.headline %></li>
+      <li><%= @user.email%></li>
+      <div>
+        <% if current_user.following?(@user) %>
+          <%= button_to "Didn't Meet", unfollow_user_path, method: :post %>
+        <% else %>
+          <%= button_to "We Met", follow_user_path, method: :post %>
+        <% end %>
+      </div>
+  </div>
+</div>

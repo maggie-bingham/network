@@ -18,10 +18,11 @@ gem "linkedin-oauth2", "~> 1.0"
 gem 'omniauth', '~> 1.2.2'
 gem 'omniauth-linkedin-oauth2'
 gem 'pg'
-gem 'geokit'
+gem 'geokit-rails'
 gem 'meetup_client'
 gem 'rMeetup'
-
+gem 'acts_as_follower', '~> 0.2.1'
+gem 'geocoder'
 
 
 gem 'figaro', '~> 1.1.1'
