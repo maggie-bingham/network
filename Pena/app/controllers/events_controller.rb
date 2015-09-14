@@ -47,6 +47,8 @@ class EventsController < ApplicationController
   def attend
     @event = Event.find(params[:id])
     @event.users << current_user
+
+    @event.save!
       redirect_to @event
   end
 
@@ -92,10 +94,7 @@ class EventsController < ApplicationController
     else
       redirect_to @event, notice: 'Status could not be saved.'
     end
-
-
-end
-
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

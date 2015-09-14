@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Categories</h1>
+  <div>
+
+    <%= @events.each do |group| %>
+      <ul>
+        <strong><%=  group.categories %></strong>
+      </ul>
+    <%end%>
+  </div>

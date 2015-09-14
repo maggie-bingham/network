@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Your Events</h1>
+
+  <div>
+
+    <% @events.each do |event| %>
+<ul>
+      <% event.each do |key, value| %>
+         <%= key %><%= value %>
+</ul>
+      <% end %>
+      <%= link_to 'Attend' %>
+    <%end%>
+
+<br>
+
+<%= link_to 'New Event', new_event_path %>
