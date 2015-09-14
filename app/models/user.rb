@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
                                     :lng_column_name => :lon
 
   has_many :notes
+  has_many :authored_notes, :class_name => "Note", :foreign_key => "author_id"
 
   acts_as_followable
   acts_as_follower
@@ -13,7 +14,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :events
   has_many :event_members, :as => :invitable
   has_many :events, :through => :event_members, :source => :attendable, :source_type => "Event"
-
 
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
