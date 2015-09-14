@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results
+      @events = Event.results(current_user.lat, current_user.lon)
         respond_to do |format|
           format.html
           format.json { render json: @event}
