@@ -15,5 +15,7 @@
           <%= button_to "We Met", follow_user_path, method: :post %>
         <% end %>
       </div>
+LOOP OVER THIS TO SHOW NOTES WROTE BY CURRENT_USER
+      <%= current_user.authored_notes.where(user: @user)%>
   </div>
 </div>

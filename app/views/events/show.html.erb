@@ -43,11 +43,13 @@
             <% else %>
               <%= link_to "We Met", follow_user_path(:id => user[:id]), method: :post %>
             <% end %>
+            <button type="button" class="btn btn-primary btn-s" data-toggle="modal" data-target="#myModal">
+            Notes</button>
+              <%= render 'events/modal'%>
         </div>
         <% end %><br>
     </div>
 
-        <!-- Blog Sidebar Widgets Column -->
         <div class="col-md-4">
             <div class="well">
                 <h4>Location:</h4>

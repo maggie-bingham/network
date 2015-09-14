@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   resources :notes
+  resources :notes
   delete '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#auth_failure'

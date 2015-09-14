@@ -18,7 +18,7 @@ class Event < ActiveRecord::Base
       { category: '3',
       lat:  lat,
       lon:  lon,
-      radius: '5',
+      radius: '20',
       format:   'json'}
   end
 

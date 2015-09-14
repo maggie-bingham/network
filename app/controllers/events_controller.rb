@@ -72,9 +72,32 @@ class EventsController < ApplicationController
     end
   end
 
-  def index2
-
+  def attend
+    @event = Event.find(params[:id])
+    @event.users << current_user
+    @event.save!
+      redirect_to @event
   end
+
+  def unattend
+    @event = Event.find(params[:id])
+    @event.users.delete(current_user)
+    redirect_to root_path
+  end
+  # PATCH/PUT /events/1
+  # PATCH/PUT /events/1.json
+  def update
+    respond_to do |format|
+      if @event.update(event_params)
+        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
+        format.json { render :show, status: :ok, location: @event }
+      else
+        format.html { render :edit }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 
   # DELETE /events/1
   # DELETE /events/1.json
@@ -86,6 +109,20 @@ class EventsController < ApplicationController
     end
   end
 
+  def rsvp
+    event_member = @event.event_members.where(["invitee_id = ?", current_user.id])[0]
+    if event_member
+      event_member.rsvp_status = params[:rsvp_status]
+    else
+      event_member = @event.event_members.build({invitee: current_user, rsvp_status: :attending})
+    end
+    if event_member.save
+      redirect_to @event, notice: 'Status was successfully updated.'
+    else
+      redirect_to @event, notice: 'Status could not be saved.'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -94,7 +131,7 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:description).permit(:name, :location, :description, :city, :state, :zipcode, :time, :date)
+      params.require(:events).permit(:id, :lat, :lon, :external_id, :group_name, :description, :date, :venue_name, :city, :state, :zipcode)
     end
 
 
