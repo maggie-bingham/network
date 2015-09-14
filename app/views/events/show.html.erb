@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Buisness Connect</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -80,7 +80,7 @@
 
                 <hr>
 
-                <div id =" btn-info">
+                <div id=" btn-info">
                 <% if @event.users.include? current_user %>
                   <%= link_to "Unattend Event", unattend_event_path(@event.id), method: :post %>
                 <% else %>
@@ -99,6 +99,24 @@
                 <p class="lead"><%= strip_tags(@event.description) %></p>
 
                 <hr>
+                <!-- Blog Sidebar Widgets Column -->
+                <div class="col-md-4">
+
+                    <!-- Blog Search Well -->
+                    <!-- Blog Categories Well -->
+
+                    <div class="well">
+                      <h4>Located:</h4>
+                        <div>
+                          <%= @event.venue_name %></br>
+                          <%= @event.address %></br>
+                          <%= @event.city %>
+                          <%= @event.state %>
+                          <%= @event.zipcode %>
+                        </div>
+                    </div>
+
+                </div>
 
                 <% @event.users.each do |user| %>
                 <div class="media">
@@ -115,32 +133,19 @@
                             <% else %>
                               <%= link_to "We Met", follow_user_path(:id => user[:id]), method: :post %>
                             <% end %>
-                            <%= link_to "| Notes", "#",  data: { toggle: "modal", target: "#ajax-modal" } %>
-                            <%= render :partial => "user/myModal", :locals => {:user => user} %>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary btn-s" data-toggle="modal" data-target="#myModal">
+                            Notes</button>
+                              <%= render 'events/modal'%>
+
+
                         </div>
                     <% end %>
                     </div>
                 </div>
 
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
 
-                <!-- Blog Search Well -->
-                <!-- Blog Categories Well -->
-
-                <div class="well">
-                  <h4>Located:</h4>
-                    <div>
-                      <%= @event.venue_name %></br>
-                      <%= @event.address %></br>
-                      <%= @event.city %>
-                      <%= @event.state %>
-                      <%= @event.zipcode %>
-                    </div>
-                </div>
-
-            </div>
 
         </div>
         <!-- /.row -->

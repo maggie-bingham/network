@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Business Connect</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -82,7 +82,7 @@
                 <h3>
                     <%= link_to event.group_name, event_path(event["id"])%>
                 </h3>
-                <p><%= event.date %></p>
+                <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
                 <p><%= strip_tags(event.description) %></p>
             </div>
         </div>
