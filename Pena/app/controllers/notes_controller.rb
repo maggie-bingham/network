@@ -12,7 +12,4 @@ class NotesController < ApplicationController
      @notes = Note.where(user_id: user_id)
    end
 
-   def create
-
-   end
 end
