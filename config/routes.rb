@@ -1,16 +1,28 @@
 Rails.application.routes.draw do
 
+  resources :notes
   delete '/logout', to: 'sessions#destroy'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#auth_failure'
-  resources :events
+  resources :user do
+    member do
+      post :follow
+      post :unfollow
+      get  :following
+    end
+  end
+  resources :events do
+    member do
+      post :attend
+      post :unattend
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
-  get 'events/index2'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

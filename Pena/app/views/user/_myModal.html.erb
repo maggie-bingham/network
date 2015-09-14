@@ -1,34 +1,18 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal<%= user.id%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+<div class="modal" id="ajax-modal" tabindex="-1" role="dialog" aria-labelledby="mainModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel"><%= user.description %> </h4>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="mainModalLabel">Notes:</h4>
       </div>
       <div class="modal-body">
-        <%= image_tag(user.picture) %>
-        <%= user.name %>
-        <%= user.title %>
-        <%= user.company %>
-        <%= user.email %>
-        <%= user.headline %>
-        <%= form_for(@event) do |f| %>
-            <%= f.form_group :terms, label: { text: "Optional Label" } do %>
-            <%= f.check_box :terms do %>
-                  Met
-                <% end %>
-              <% end %>
-
-              <%= f.label :notes %><br>
-              <%= f.text_area :notes %>
-        <%end%>
-
-
+        <form method="POST" class="form-horizontal" onsubmit="return false">
+         <input id="id_name" maxlength="250" name="name" type="text">
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Exit</button>
-
       </div>
     </div>
   </div>

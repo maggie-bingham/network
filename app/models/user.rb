@@ -1,4 +1,19 @@
 class User < ActiveRecord::Base
+  acts_as_mappable :default_units => :miles,
+                                    :default_formula => :sphere,
+                                    :distance_field_name => :distance,
+                                    :lat_column_name => :lat,
+                                    :lng_column_name => :lon
+
+  has_many :notes
+
+  acts_as_followable
+  acts_as_follower
+
+  has_and_belongs_to_many :events
+  has_many :event_members, :as => :invitable
+  has_many :events, :through => :event_members, :source => :attendable, :source_type => "Event"
+
 
     def self.from_omniauth(auth)
       Rails.logger.info auth.to_yaml
@@ -14,8 +29,6 @@ class User < ActiveRecord::Base
       end
     end
 
-
-
     def company
       api = LinkedIn::API.new(access_token)
       company_hash = api.profile(fields:["id", {"positions" => ["company" => ["name"]]}])
@@ -29,4 +42,7 @@ class User < ActiveRecord::Base
       title = title_hash.positions.all[0].title
       title
     end
+
+
+
 end
