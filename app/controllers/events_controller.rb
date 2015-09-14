@@ -51,16 +51,18 @@ class EventsController < ApplicationController
     @event.users << current_user
     @event.save!
       respond_to do |format|
-        format.html { render: => true}
-        format.json { render: => true}
+        format.html { render nothing: true}
+        format.json { render nothing: true}
+      end
   end
 
   def unattend
     @event = Event.find(params[:id])
     @event.users.delete(current_user)
     respond_to do |format|
-      format.html { render: => true}
-      format.json { render: => true}
+      format.html { render nothing: true}
+      format.json { render nothing: true}
+    end
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
