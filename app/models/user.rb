@@ -43,6 +43,4 @@ class User < ActiveRecord::Base
       title
     end
 
-
-
 end

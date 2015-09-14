@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-      @events = Event.results
+      @events = Event.results(current_user.lat, current_user.lon)
         respond_to do |format|
           format.html
           format.json { render json: @event}
@@ -45,6 +45,19 @@ class EventsController < ApplicationController
     end
   end
 
+  def attend
+     @event = Event.find(params[:id])
+     @event.users << current_user
+
+     @event.save!
+       redirect_to @event
+   end
+
+   def unattend
+     @event = Event.find(params[:id])
+     @event.users.delete(current_user)
+     redirect_to root_path
+   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
