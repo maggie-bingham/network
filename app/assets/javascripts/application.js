@@ -14,9 +14,3 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
-
-
-// jQuery(document).ready(function($){
-//   $('#myModal').modal('options')
-//   var body = $( 'show' );
-// });
