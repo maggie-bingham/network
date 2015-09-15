@@ -26,6 +26,9 @@ class UserController < ApplicationController
     redirect_to @user
   end
 
+  def noted
+    @users = User.all
+  end
 
   private
 

@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
           <h2><%= current_user.name %></h2>
-          <p class="lead"> <%= link_to "Events Happening Nearby", events_path %> | <%= link_to "People You've Met", user_index_path %></p>
+          <p class="lead"> <%= link_to "Events Nearby", events_path %> | <%= link_to "People Met", user_index_path %> | <%= link_to "Noted People", noted_path %></p>
         </div>
       </div>
     </div>
@@ -22,8 +22,9 @@
     </div>
   </div>
 
-  <% @user.events.each do |event| %>
+  <% @user.events.each_slice(4) do |row| %>
   <div class="row text-center">
+    <% row.each do |event| %>
     <div class="col-md-3 col-sm-6 hero-feature">
         <div class="thumbnail">
           <img src="http://placehold.it/800x500" alt="">
@@ -43,6 +44,7 @@
           </div>
         </div>
     </div>
+    <% end %>
   </div>
   <% end %>
 </div>

@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.param(lat,lon)
-      { category: '3',
+      { category: '6',
       lat:  lat,
       lon:  lon,
       radius: '20',

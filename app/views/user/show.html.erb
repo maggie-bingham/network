@@ -1,26 +1,58 @@
-<div class="profile">
-  <div class-"user-info">
-    <ul>
-      <img src="<%= @user.image_url %>">
-      <strong><%= @user.name %></strong><br>
-      <%= @user.headline %><br>
-      <%= @user.title %><br>
-      <%= @user.company %><br>
-      <%= @user.email%><br>
+<section>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-3 centersize">
+            <img class="img-responsive img-center" src="<%= @user.image_url %>" alt="">
+            <% if current_user.following?(@user) %>
+              <%= link_to "Remove", unfollow_user_path, method: :post %>
+            <% else %>
+              <%= link_to "We Met", follow_user_path, method: :post %>
+            <% end %>
+          </div>
+          <div class="col-md-9">
+              <h1 class="section-heading"><%= @user.name %></h1>
+              <h3><%= @user.headline %> - <%= @user.headline %> - <%= @user.email %></h3>
+          </div>
+        </div>
+<hr>
+    <div>
+      <h2>Notes</h2>
+      <% current_user.notes_for_user.each do |note| %>
+        <li><%= note.body %>
+        <%= link_to "edit", note_path %></li>
+      <%end%>
+  </div>
+<hr>
+  <div>
+    <h3>Events in common:</h3>
+    <% if @user.events & current_user.events %>
+    <% @user.events.each_slice(4) do |row| %>
+    <div class="row text-center">
+    <% row.each do |event| %>
+    <div class="col-md-3 col-sm-6 hero-feature">
+        <div class="thumbnail">
+          <img src="http://placehold.it/800x500" alt="">
+          <div class="caption">
+            <h3><%= link_to event.group_name, event_path(event[:id]) %></h3>
+            <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
+            <div class="btn btn-default">
+            <% if event.users.include? current_user %>
+              <%= link_to "Unattend", unattend_event_path(event.id), method: :post %>
+            <% else %>
+              <%= link_to "Attend", attend_event_path(event.id), method: :post %>
+            <% end %>
+            </div>
+              <div class="btn btn-default">
+                <%= link_to "MORE INFO", event_path(event["id"])%>
+              </div>
+          </div>
+        </div>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+  <% end %>
 
-      <div>
-        <% if current_user.following?(@user) %>
-          <%= button_to "Didn't Meet", unfollow_user_path, method: :post %>
-        <% else %>
-          <%= button_to "We Met", follow_user_path, method: :post %>
-        <% end %>
-      </div>
-                  <h2>Notes</h2>
-            <ul>
-              <% current_user.notes_for_user.each do |note| %>
-                <li><%= note.body %>
-                  <%= link_to "edit", note_path %></li>
-              <%end%>
-            </ul>
   </div>
 </div>
+</section>

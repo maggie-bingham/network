@@ -6,14 +6,16 @@
       </h1>
     </div>
   </div>
+  <% @events.each_slice(3) do |row| %>
   <div class="row">
-    <% @events.map do |event| %>
+    <% row.each do |event| %>
       <div class="col-md-4 portfolio-item">
         <img class="img-responsive" src="http://placehold.it/700x400" alt="">
         <h3><%= link_to event.group_name, event_path(event["id"])%></h3>
         <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
         <p><%= strip_tags(event.description).truncate(200) %></p>
       </div>
+      <% end %>
   </div>
     <% end %>
 </div>
