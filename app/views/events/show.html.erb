@@ -8,14 +8,13 @@
 
 <hr>
 
-      <div id =" btn-info">
+      <div class=" btn btn-default">
         <% if @event.users.include? current_user %>
           <%= link_to "Unattend Event", unattend_event_path(@event.id), method: :post %>
         <% else %>
           <%= link_to "Attend Event", attend_event_path(@event.id), method: :post %>
         <% end %>
       </div>
-
 <hr>
       <img class="img-responsive" src="http://placehold.it/900x300" alt="">
 
@@ -24,30 +23,7 @@
       <p class="lead"><%= strip_tags(@event.description) %></p>
 
 <hr>
-      <div>
-        <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
-      </div>
 
-      <% @event.users.each do |user| %>
-      <div class="media">
-          <div class="pull-left">
-              <img class="media-object" src="<%= user.image_url %>" alt="">
-          </div>
-          <div class="media-body">
-              <h4 class="media-heading"><%= link_to user.name, user_path(user[:id]) %>
-                  <br><small><%= user.headline %></small>
-              </h4>
-          </div>
-            <% if current_user.following?(user) %>
-              <%= link_to "Didn't Meet", unfollow_user_path(:id => user[:id]), method: :post %>
-            <% else %>
-              <%= link_to "We Met", follow_user_path(:id => user[:id]), method: :post %>
-            <% end %>
-            <button type="button" class="btn btn-primary btn-s" data-toggle="modal" data-target="#myModal">
-            Notes</button>
-              <%= render 'events/modal'%>
-        </div>
-        <% end %><br>
     </div>
 
         <div class="col-md-4">
@@ -59,6 +35,40 @@
                 <%= @event.state %>
                 <%= @event.zipcode %>
             </div>
-        </div>
+            <div>
+              <h3>Who's Attending (<%= @event.users.count %>)</h3><br>
+            </div>
+
+
+<div class="cold-md-4">
+            <% @event.users.each do |user| %>
+              <% if user.distance_to(@event) <= 1 && Time.now >= @event.date %>
+                <div class="well">
+                  <div class="media">
+              <% else %>
+                <div class="well">
+                  <div class="media" style="opacity: 0.4">
+              <% end %>
+                    <div class="pull-left">
+                      <img class="media-object" src="<%= user.image_url %>" alt="">
+                    </div>
+                      <div class="media-body">
+                        <h4 class="media-heading"><%= link_to user.name, user_path(user[:id]) %>
+                          <br><small><%= user.headline %></small>
+                        </h4>
+                      </div>
+                        <% if current_user.following?(user) %>
+                          <%= link_to "Didn't Meet", unfollow_user_path(:id => user[:id]), class: "btn btn-default", method: :post %>
+                        <% else %>
+                          <%= link_to "We Met", follow_user_path(:id => user[:id]), class: "btn btn-default", method: :post %>
+                        <% end %>
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                        Notes</button>
+                          <%= render 'events/modal'%>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+
     </div>
 </div>

@@ -43,4 +43,9 @@ class User < ActiveRecord::Base
       title
     end
 
+    def location(lat, lon)
+      User.within(1, :origin => [lat, lon])
+    end
+
+
 end
