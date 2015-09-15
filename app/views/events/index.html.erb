@@ -14,6 +14,16 @@
         <h3><%= link_to event.group_name, event_path(event["id"])%></h3>
         <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
         <p><%= strip_tags(event.description).truncate(200) %></p>
+          <div class="btn btn-default">
+          <% if event.users.include? current_user %>
+            <%= link_to "Unattend", unattend_event_path(event.id), method: :post %>
+          <% else %>
+            <%= link_to "Attend", attend_event_path(event.id), method: :post %>
+          <% end %>
+          </div>
+            <div class="btn btn-default">
+              <%= link_to "MORE INFO", event_path(event["id"])%>
+            </div>
       </div>
       <% end %>
   </div>

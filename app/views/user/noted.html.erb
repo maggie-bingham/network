@@ -1,5 +1,19 @@
-<% @users.each do |user| %>
-<% if user.followed_by?(current_user) == false && current_user.authored_notes.exists?(user: user) == true %>
-<%= user.name %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h2 class="page-header">Noted People</h2>
+    </div>
+    <div class="col-lg-4 col-sm-6 text-center">
+    <% @users.each_slice(3) do |row| %>
+    <% row.each do |user| %>
+      <% if user.followed_by?(current_user) == false && current_user.authored_notes.exists?(user: user) == true %>
+      <img class="img-circle img-responsive img-center" src= "<%= user.image_url %>" alt="">
+        <h3><%= link_to user.name, user_path(user[:id]) %>
+          <br><small><%= user.company%> - <%= user.title %></small>
+        </h3>
+    </div>
+<% else %>
+<p> You haven't taken any notes on people you haven't met yet  - head over to </p>
+<% end %>
 <% end %>
 <% end %>
