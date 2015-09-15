@@ -4,9 +4,9 @@
       <img src="<%= @user.image_url %>">
       <strong><%= @user.name %></strong><br>
       <%= @user.headline %><br>
-      <%= @user.email%><br>
       <%= @user.title %><br>
       <%= @user.company %><br>
+      <%= @user.email%><br>
 
       <div>
         <% if current_user.following?(@user) %>
@@ -15,10 +15,11 @@
           <%= button_to "We Met", follow_user_path, method: :post %>
         <% end %>
       </div>
+                  <h2>Notes</h2>
             <ul>
               <% current_user.notes_for_user.each do |note| %>
                 <li><%= note.body %>
-                <%= link_to "edit", note_path %></li>
+                  <%= link_to "edit", note_path %></li>
               <%end%>
             </ul>
   </div>
