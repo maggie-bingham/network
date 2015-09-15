@@ -63,15 +63,15 @@
                       </div>
                         <% if user != current_user %>
                         <% if current_user.following?(user) %>
-                          <%= link_to "Didn't Meet", unfollow_user_path(:id => user[:id]), class: "btn btn-default", method: :post %>
+                          <%= link_to "Didn't Meet", unfollow_user_path(user), class: "btn btn-default", method: :post %>
                         <% else %>
-                          <%= link_to "We Met", follow_user_path(:id => user[:id]), class: "btn btn-default", method: :post %>
+                          <%= link_to "We Met", follow_user_path(user), class: "btn btn-default", method: :post %>
                         <% end %>
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-<%= user.id %>">
                         Notes</button>
                     </div>
                   </div>
-                  <%= render 'events/modal', :locals => {:user => user.id}%>
+                  <%= render :partial =>'shared/modal', :locals => {:user => user.id} %>
               <% end %>
               <% end %>
             </div>
