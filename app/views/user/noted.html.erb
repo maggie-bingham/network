@@ -1,0 +1,5 @@
+<% @users.each do |user| %>
+<% if user.followed_by?(current_user) == false && current_user.authored_notes.exists?(user: user) == true %>
+<%= user.name %>
+<% end %>
+<% end %>

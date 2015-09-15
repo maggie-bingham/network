@@ -3,7 +3,7 @@
     <div class="col-lg-8">
       <h1><%= @event.group_name %></h1>
       <p class="lead">
-        <p><span class="glyphicon glyphicon-time"></span> <%= @event.date.strftime("%B %d, %Y %I:%M %p") %></p>
+        <p><%= @event.date.strftime("%B %d, %Y %I:%M %p") %></p>
       </p>
 
 <hr>
@@ -53,10 +53,15 @@
                       <img class="media-object" src="<%= user.image_url %>" alt="">
                     </div>
                       <div class="media-body">
-                        <h4 class="media-heading"><%= link_to user.name, user_path(user[:id]) %>
-                          <br><small><%= user.headline %></small>
-                        </h4>
+                        <% if user != current_user %>
+                          <h4 class="media-heading"><%= link_to user.name, user_path(user[:id]) %>
+                        <% else %>
+                          <h4 class="media=heading"><%= link_to user.name, root_path %>
+                        <% end %>
+                            <br><small><%= user.headline %></small>
+                          </h4>
                       </div>
+                        <% if user != current_user %>
                         <% if current_user.following?(user) %>
                           <%= link_to "Didn't Meet", unfollow_user_path(:id => user[:id]), class: "btn btn-default", method: :post %>
                         <% else %>
@@ -64,9 +69,10 @@
                         <% end %>
                         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
                         Notes</button>
-                          <%= render 'events/modal'%>
                     </div>
                   </div>
+                  <%= render 'events/modal'%>
+              <% end %>
               <% end %>
             </div>
 
