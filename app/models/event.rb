@@ -23,32 +23,39 @@ class Event < ActiveRecord::Base
   end
 
   def self.results(lat, lon)
-     event_data = MeetupApi.new.open_events(param(lat, lon))["results"]
-     events = event_data.map do |event|
-       Rails.logger.info event.inspect
-         u = Event.find_or_initialize_by(:external_id => event["id"])
-         u.external_id = event["id"]
-         u.group_name = event["group"]["name"]
-         u.date = Time.at(event["time"]/1000)
-         u.description = event["description"] || ""
-         u.venue_name = event["venue"].try('["name"]'.to_sym) || ""
-         u.address = event["venue"].try('["address_1"]'.to_sym) || ""
-         u.city = event["venue"].try('["city"]'.to_sym) || ""
-         u.state = event["venue"].try('["state"]'.to_sym) || ""
-         u.zipcode = event["venue"].try('["zip"]'.to_sym) || ""
-         u.lat = event["venue"].try('["lat"]'.to_sym) || 0
-         u.lon = event["venue"].try('["lon"]'.to_sym) || 0
-         u.save!
-         u
-     end
+    event_data = MeetupApi.new.open_events(param(lat, lon))["results"]
+    events = event_data.map do |event|
+      Rails.logger.info event.inspect
+        u = Event.find_or_initialize_by(:external_id => event["id"])
+        u.external_id = event["id"]
+        u.group_name = event["group"]["name"]
+        u.date = Time.at(event["time"]/1000)
+        u.description = event["description"] || ""
+        u.venue_name = event["venue"].try('["name"]'.to_sym) || ""
+        u.address = event["venue"].try('["address_1"]'.to_sym) || ""
+        u.city = event["venue"].try('["city"]'.to_sym) || ""
+        u.state = event["venue"].try('["state"]'.to_sym) || ""
+        u.zipcode = event["venue"].try('["zip"]'.to_sym) || ""
+        u.lat = event["venue"].try('["lat"]'.to_sym) || 0
+        u.lon = event["venue"].try('["lon"]'.to_sym) || 0
+        u.urlname = event["group"]["urlname"]
+        u.save!
+        u
+    end
     events.select(&:persisted?)
 
   end
 
-  def categories
-    cat = MeetupApi.new.categories({})["results"]
+
+  def photos(urlname)
+      data = MeetupApi.new(urlname)["results"]
+      pix = data.map do |group|
+      t = Event.find_or_initialize_by(:urlname => group["urlname"])
+      t.photo = group["group_photo"]["highres_link"]
+      t.save
+      t.photo
+    end
 
   end
-
 
 end

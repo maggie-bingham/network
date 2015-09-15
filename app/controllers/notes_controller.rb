@@ -9,10 +9,7 @@ class NotesController < ApplicationController
   end
 
   def create
-    @note = Note.new(note_params)
-    @notes = Note.all
         current_user.authored_notes << Note.new(note_params)
-        @note.save!
         respond_to do |format|
           format.html { redirect_to :back }
           format.js { render :new }

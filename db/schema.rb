@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20150915204420) do
     t.float    "lon"
     t.float    "lat"
     t.datetime "date"
+    t.string   "urlname"
   end
 
   create_table "events_users", force: :cascade do |t|
