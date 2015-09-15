@@ -71,7 +71,7 @@
                         Notes</button>
                     </div>
                   </div>
-                  <%= render 'events/modal'%>
+                  <%= render 'events/modal', :locals => {:user => user.id}%>
               <% end %>
               <% end %>
             </div>

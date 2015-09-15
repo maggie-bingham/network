@@ -16,6 +16,7 @@
         </div>
 <hr>
     <div>
+      <h2>Notes</h2>
       <% current_user.notes_for_user.each do |note| %>
         <li><%= note.body %>
         <%= link_to "edit", note_path %></li>
