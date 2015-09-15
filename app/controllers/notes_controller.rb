@@ -10,21 +10,60 @@ class NotesController < ApplicationController
 
   def create
     @note = Note.new(note_params)
-   @note.user_id = current_user.id
+    @notes = Note.all
+        current_user.authored_notes << Note.new(note_params)
+        @note.save!
+        respond_to do |format|
+          format.html { redirect_to :back }
+          format.js { render :new }
+        end
 
-   respond_to do |format|
-     if @gif.save
-       format.html { redirect_to gifs_path, notice: 'Gif was successfully created.' }
-       format.js { }
-     else
-       format.html { render :new }
-       format.js {  }
-     end
-   end
   end
 
    def index
      @notes = Notes.where(current_user: current_user)
    end
+
+   def update
+    respond_to do |format|
+      if @note.update(note_params)
+        format.html { redirect_to @topic, notice: 'Note was successfully updated' }
+        format.json { render :show }
+      else
+        format.html { render :edit }
+        format.json {  }
+      end
+    end
+   end
+
+   def show
+     respond_to do |format|
+       format.html
+       format.json { render json: @note}
+     end
+   end
+
+   def edit
+   end
+
+   def destroy
+     @note.destroy
+      respond_to do |format|
+        format.html { redirect_to user_url, notice: 'Topic was successfully destroyed.' }
+        format.json { head :no_content }
+    end
+  end
+
+
+
+   private
+
+   def set_gif
+      @note = Note.find(params[:id])
+    end
+
+    def note_params
+      params.require(:note).permit(:user_id, :author_id, :body)
+    end
 
 end

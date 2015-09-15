@@ -5,8 +5,8 @@
       <% row.each do |user| %>
         <div class= "col-xs-3">
 
-          <%= link_to image_tag(user.picture, :class => "img-responsive"), "#","data-toggle" => "modal", "data-target" => "#myModal#{user.id}" %>
-          <%= render :partial => "user/myModal", :locals => {:user => user} %>
+          <%= link_to image_tag(user.picture, :class => "img-responsive"), "#","data-toggle" => "modal", "data-target" => "#myModal" %>
+          <%= render :partial => "user/myModal" %>
 
         </div>
       <% end %>

@@ -15,13 +15,29 @@
   </ul>
 
 
-
+  <div id="myModal" class="class hide fade">
+    <%= form_for(Note.new) do |f| %>
+      <div id="error_explanation">
+          <ul>
+            <div id="field">
+              <%= f.label :note %>
+              <%= f.text_field :body %>
+            </div>
+            <div id="actions">
+              <%= f.submit %>
+            </div>
+          </ul>
+      </div>
+    <%end%>
+  </div>
 
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
   Notes
 </button>
+
+<
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

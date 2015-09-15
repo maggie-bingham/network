@@ -16,7 +16,10 @@
         </div>
 <hr>
     <div>
-    <%= current_user.authored_notes.where(user: @user)%>
+      <% current_user.notes_for_user.each do |note| %>
+        <li><%= note.body %>
+        <%= link_to "edit", note_path %></li>
+      <%end%>
   </div>
 <hr>
   <div>
@@ -48,7 +51,6 @@
   </div>
   <% end %>
   <% end %>
-
 
   </div>
 </div>

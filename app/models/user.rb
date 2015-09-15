@@ -43,9 +43,8 @@ class User < ActiveRecord::Base
       title
     end
 
-    def location(lat, lon)
-      User.within(1, :origin => [lat, lon])
+    def notes_for_user
+      authored_notes.where(user: @user)
     end
-
 
 end
