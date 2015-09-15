@@ -2,11 +2,11 @@
   <div class-"user-info">
     <ul>
       <img src="<%= @user.image_url %>">
-      <strong><%= @user.name %></strong>
-      <%= @user.headline %>
-      <%= @user.email%>
-      <%= @user.title %>
-      <%= @user.company %>
+      <strong><%= @user.name %></strong><br>
+      <%= @user.headline %><br>
+      <%= @user.email%><br>
+      <%= @user.title %><br>
+      <%= @user.company %><br>
 
       <div>
         <% if current_user.following?(@user) %>
@@ -15,7 +15,11 @@
           <%= button_to "We Met", follow_user_path, method: :post %>
         <% end %>
       </div>
-LOOP OVER THIS TO SHOW NOTES WROTE BY CURRENT_USER
-      <%= current_user.authored_notes.where(user: @user)%>
+            <ul>
+              <% current_user.notes_for_user.each do |note| %>
+                <li><%= note.body %>
+                <%= link_to "edit", note_path %></li>
+              <%end%>
+            </ul>
   </div>
 </div>

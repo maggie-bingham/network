@@ -1,11 +1,11 @@
 <div id="modal-window" class="class hide fade">
   <%= form_for(Note.new) do |f| %>
     <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this event from being saved:</h2>
+
         <ul>
           <div id="field">
-            <%= f.label :content %>
-            <%= f.text_field :content %>
+            <%= f.label :note %>
+            <%= f.text_field :body %>
           </div>
           <div id="actions">
             <%= f.submit %>

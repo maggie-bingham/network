@@ -43,4 +43,8 @@ class User < ActiveRecord::Base
       title
     end
 
+    def notes_for_user
+      authored_notes.where(user: @user)
+    end
+
 end
