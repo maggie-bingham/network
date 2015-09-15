@@ -33,7 +33,6 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new
-
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
@@ -45,32 +44,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def attend
-     @event = Event.find(params[:id])
-     @event.users << current_user
-
-     @event.save!
-       redirect_to @event
-   end
-
-   def unattend
-     @event = Event.find(params[:id])
-     @event.users.delete(current_user)
-     redirect_to root_path
-   end
-  # PATCH/PUT /events/1
-  # PATCH/PUT /events/1.json
-  def update
-    respond_to do |format|
-      if @event.update(event_params)
-        format.html { redirect_to @event, notice: 'Event was successfully updated.' }
-        format.json { render :show, status: :ok, location: @event }
-      else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def attend
     @event = Event.find(params[:id])

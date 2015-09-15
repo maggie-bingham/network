@@ -35,7 +35,8 @@
           </div>
           <div class="media-body">
               <h4 class="media-heading"><%= link_to user.name, user_path(user[:id]) %>
-                  <br><small><%= user.headline %></small>
+                  <br><small><%= user.title %></small>
+                  <br><small><%= user.company %></small>
               </h4>
           </div>
             <% if current_user.following?(user) %>
@@ -45,7 +46,12 @@
             <% end %>
             <button type="button" class="btn btn-primary btn-s" data-toggle="modal" data-target="#myModal">
             Notes</button>
-              <%= render 'events/modal'%>
+            <%= render 'modal' %>
+
+
+
+
+
         </div>
         <% end %><br>
     </div>
