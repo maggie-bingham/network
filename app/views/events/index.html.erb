@@ -10,7 +10,8 @@
   <div class="row">
     <% row.each do |event| %>
       <div class="col-md-4 portfolio-item">
-        <img class="img-responsive" src='<%= event.image_url %>' alt="">
+
+        <img class="img-responsive" src='<%= event.image_url %>' alt=""></br>
 
         <h3><%= link_to event.group_name, event_path(event)%></h3>
         <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
@@ -27,6 +28,6 @@
             </div>
       </div>
       <% end %>
-  </div>
+  </div></br>
     <% end %>
 </div>
