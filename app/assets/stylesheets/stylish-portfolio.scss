@@ -23,9 +23,6 @@ body {
   height:500px;
 }
 
-.other-color {
-  background: #66F0B9;
-}
 .text-vertical-center {
     display: table-cell;
     text-align: center;
@@ -48,7 +45,7 @@ body {
 
 #welcome::after {
   content: "";
-  background: url('networking_function.jpg') no-repeat center center;
+  background: image-url("networking_function.jpg") no-repeat center center;
   background-size: cover;
   opacity: 0.5;
   top: 0;
@@ -147,6 +144,7 @@ footer {
     .section-heading {
         font-size: 2em;
     }
-footer {
-    padding: 100px 0;
-}
+    footer {
+      padding: 100px 0;
+    }
+  }
