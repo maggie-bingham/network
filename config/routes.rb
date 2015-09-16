@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   resources :notes
-  resources :notes
   get '/search', to: 'user#users'
   get '/noted', to: 'user#noted'
   delete '/logout', to: 'sessions#destroy'
