@@ -8,14 +8,23 @@
 
 html,
 body {
-
     width: 100%;
     height: 100%;
 }
 
 body {
     font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding-top: 70px;
 
+}
+
+.event-image {
+  width:800px;
+  height:500px;
+}
+
+.other-color {
+  background: #66F0B9;
 }
 
 .text-vertical-center {

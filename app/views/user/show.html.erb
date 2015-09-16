@@ -1,7 +1,7 @@
 <section>
 
 <div class="container">
-  <header class="jumbotron hero-spacer centersize">
+  <header class="jumbotron hero-spacer centersize other-color">
       <img class="img-responsive img-center" style="height: 175px" src="<%= @user.image_url %>" alt="">
     <h1><%= @user.name %></h1>
     <p><%= @user.company %> - <%= @user.company %> - <%= @user.email %></p>
@@ -42,7 +42,7 @@
           <% row.each do |event| %>
           <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-              <img src="<%= event.image_url %>" alt="">
+              <img class="event-image" src="<%= event.image_url %>" alt="">
               <div class="caption">
                 <h3><%= link_to event.group_name, event_path(event[:id]) %></h3>
                 <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
