@@ -39,23 +39,13 @@ class Event < ActiveRecord::Base
         u.lat = event["venue"].try('["lat"]'.to_sym) || 0
         u.lon = event["venue"].try('["lon"]'.to_sym) || 0
         u.urlname = event["group"]["urlname"]
+        data = MeetupApi.new(u.urlname)["results"]
+        u.photo = data.first["group_photo"]["highres_link"]
         u.save!
         u
     end
     events.select(&:persisted?)
-
   end
 
-
-  def photos(urlname)
-      data = MeetupApi.new(urlname)["results"]
-      pix = data.map do |group|
-      t = Event.find_or_initialize_by(:urlname => group["urlname"])
-      t.photo = group["group_photo"]["highres_link"]
-      t.save
-      t.photo
-    end
-
-  end
 
 end

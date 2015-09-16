@@ -12,10 +12,6 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <link href="css/heroic-features.css" rel="stylesheet">
-  <link href="css/round-about.css" rel="stylesheet">
-  <link href="css/blog-post.css" rel="stylesheet">
-  <link href="css/3-col-portfolio.css" rel="stylesheet">
   <link href="css/stylish-portfolio.css" rel="stylesheet">
 
 <!-- Custom Fonts -->
@@ -45,9 +41,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><%= link_to "Events", events_path %></li>
-        <li><%= link_to "People Met", user_index_path %></li>
-        <li><%= link_to "Noted People", noted_path %></li>
-        <li><%= link_to "Search", search_path %></li>
+        <li><%= link_to "Connections", user_index_path %></li>
+        <li><%= link_to "Notes Taken", noted_path %></li>
+        <li><%= link_to "New Connections", search_path %></li>
         <li><%= link_to "Logout", logout_path, :method => :delete %></li>
       </ul>
     </div>
