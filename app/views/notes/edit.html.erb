@@ -1,6 +1,6 @@
 <h1>Editing Note</h1>
 
-<%= render 'form' %>
+<%= render 'form', :locals => (@note => note) %>
 
 <%= link_to 'Show', @note %> |
 <%= link_to 'Back', user_path %>

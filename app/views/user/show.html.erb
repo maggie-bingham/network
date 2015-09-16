@@ -23,7 +23,7 @@
         <h2>Notes:</h2>
         <div class="caption col-md-offset-2">
           <% current_user.notes_for_user(@user).each do |note| %>
-            <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "edit", note_path %></p>
+            <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "delete", note_path, method: :delete %></p>
           <%end%>
         </div>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-<%= @user.id %>">Add a Note</button>
@@ -42,7 +42,7 @@
           <% row.each do |event| %>
           <div class="col-md-3 col-sm-6 hero-feature">
             <div class="thumbnail">
-              <img src="http://placehold.it/800x500" alt="">
+              <img src="<%= event.image_url %>" alt="">
               <div class="caption">
                 <h3><%= link_to event.group_name, event_path(event[:id]) %></h3>
                 <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>

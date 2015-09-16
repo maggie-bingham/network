@@ -24,28 +24,31 @@ class Event < ActiveRecord::Base
 
   def self.results(lat, lon)
     event_data = MeetupApi.new.open_events(param(lat, lon))["results"]
+    event_external_ids = event_data.map{|event| event["id"]}
+    Rails.logger.info event_external_ids.inspect
     events = event_data.map do |event|
-      Rails.logger.info event.inspect
+      Rails.logger.info event.keys.inspect
+      Rails.logger.info event["venue"].inspect
         u = Event.find_or_initialize_by(:external_id => event["id"])
         u.external_id = event["id"]
         u.group_name = event["group"]["name"]
         u.date = Time.at(event["time"]/1000)
         u.description = event["description"] || ""
-        u.venue_name = event["venue"].try('["name"]'.to_sym) || ""
-        u.address = event["venue"].try('["address_1"]'.to_sym) || ""
-        u.city = event["venue"].try('["city"]'.to_sym) || ""
-        u.state = event["venue"].try('["state"]'.to_sym) || ""
-        u.zipcode = event["venue"].try('["zip"]'.to_sym) || ""
-        u.lat = event["venue"].try('["lat"]'.to_sym) || 0
-        u.lon = event["venue"].try('["lon"]'.to_sym) || 0
+        u.venue_name = event["venue"] ? event["venue"]["name"] : ""
+        u.address = event["venue"] ? event["venue"]["address_1"] : ""
+        u.city = event["venue"] ? event["venue"]["city"] : ""
+        u.state = event["venue"] ? event["venue"]["state"] : ""
+        u.zipcode = event["venue"] ? event["venue"]["zip"] : ""
+        u.lat = event["venue"] ? event["venue"]["lat"] : 0
+        u.lon = event["venue"] ? event["venue"]["lon"] : 0
         u.urlname = event["group"]["urlname"]
-        data = MeetupApi.new(u.urlname)["results"]
-        u.photo = data.first["group_photo"]["highres_link"]
+          res = JSON.parse ApiCallers::HttpRequest.new("http://api.meetup.com/#{u.urlname}?key=#{MeetupClient.config.api_key}").make_request
+            if res["photos"]
+        u.image_url = res["photos"].select{|photo| photo.has_key?("highres_link")}.first["highres_link"]
+            end
         u.save!
         u
     end
-    events.select(&:persisted?)
   end
-
 
 end

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   def new
     @notes = Note.new
@@ -24,7 +25,7 @@ class NotesController < ApplicationController
    def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to @topic, notice: 'Note was successfully updated' }
+        format.html { redirect_to @note, notice: 'Note was successfully updated' }
         format.json { render :show }
       else
         format.html { render :edit }
@@ -46,7 +47,7 @@ class NotesController < ApplicationController
    def destroy
      @note.destroy
       respond_to do |format|
-        format.html { redirect_to user_url, notice: 'Topic was successfully destroyed.' }
+        format.html { redirect_to user_url, notice: 'Note was successfully destroyed.' }
         format.json { head :no_content }
     end
   end
@@ -55,7 +56,7 @@ class NotesController < ApplicationController
 
    private
 
-   def set_gif
+   def set_note
       @note = Note.find(params[:id])
     end
 
