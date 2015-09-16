@@ -47,15 +47,6 @@ class Event < ActiveRecord::Base
   end
 
 
-  def photos(urlname)
-      data = MeetupApi.new(urlname)["results"]
-      pix = data.map do |group|
-      t = Event.find_or_initialize_by(:urlname => group["urlname"])
-      t.photo = group["group_photo"]["highres_link"]
-      t.save
-      t.photo
-    end
 
-  end
-
+  #  image_url = ["group_photo"]["highres_link"]
 end
