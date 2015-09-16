@@ -45,7 +45,7 @@ body {
 
 #welcome::after {
   content: "";
-  background: url('networking_function.jpg') no-repeat center center;
+  background: image-url("networking_function.jpg") no-repeat center center;
   background-size: cover;
   opacity: 0.5;
   top: 0;
