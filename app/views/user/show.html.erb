@@ -4,7 +4,7 @@
   <header class="jumbotron hero-spacer centersize other-color">
       <img class="img-responsive img-center" style="height: 175px" src="<%= @user.image_url %>" alt="">
     <h1><%= @user.name %></h1>
-    <p><%= @user.company %> - <%= @user.company %> - <%= @user.email %></p>
+    <p><%= @user.title %> - <%= @user.company %> - <%= @user.email %></p>
     <p>
       <div class="btn btn-primary btn-large">
       <% if current_user.following?(@user) %>
@@ -23,7 +23,7 @@
         <h2>Notes:</h2>
         <div class="caption col-md-offset-2">
           <% current_user.notes_for_user(@user).each do |note| %>
-            <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "delete", note_path, method: :delete %></p>
+            <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "delete", note_path(note), method: :delete %></p>
           <%end%>
         </div>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-<%= @user.id %>">Add a Note</button>
