@@ -15,7 +15,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.param(lat,lon)
-      { category: '2',
+      { category: '22',
       lat:  lat,
       lon:  lon,
       radius: '30',
@@ -24,11 +24,15 @@ class Event < ActiveRecord::Base
 
   def self.results(lat, lon)
     event_data = MeetupApi.new.open_events(param(lat, lon))["results"]
-    event_external_ids = event_data.map{|event| event["id"]}
-    Rails.logger.info event_external_ids.inspect
-    events = event_data.map do |event|
-      Rails.logger.info event.keys.inspect
-      Rails.logger.info event["venue"].inspect
+    if event_data.blank?
+      within(30, :origin => [lat, lon])
+    else
+      Rails.logger.info(event_data.inspect)
+      event_external_ids = event_data.map{ |event| event["id"]}
+      Rails.logger.info event_external_ids.inspect
+      events = event_data.map do |event|
+        Rails.logger.info event.keys.inspect
+        Rails.logger.info event["venue"].inspect
         u = Event.find_or_initialize_by(:external_id => event["id"])
         u.external_id = event["id"]
         u.group_name = event["group"]["name"]
@@ -42,12 +46,15 @@ class Event < ActiveRecord::Base
         u.lat = event["venue"] ? event["venue"]["lat"] : 0
         u.lon = event["venue"] ? event["venue"]["lon"] : 0
         u.urlname = event["group"]["urlname"]
+        if u.urlname.blank?
           res = JSON.parse ApiCallers::HttpRequest.new("http://api.meetup.com/#{u.urlname}?key=#{MeetupClient.config.api_key}").make_request
-            if res["photos"]
-        u.image_url = res["photos"].select{|photo| photo.has_key?("highres_link")}.first["highres_link"]
-            end
+          if res["photos"]
+            u.image_url = res["photos"].select{|photo| photo.has_key?("highres_link")}.first["highres_link"]
+          end
+        end
         u.save!
         u
+      end
     end
   end
 
