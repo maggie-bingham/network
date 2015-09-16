@@ -1,11 +1,11 @@
-<%= form_for(@note) do |f| %>
+<%= form_for(@notes) do |f| %>
       <ul>
       <% @note.each do |note| %>
         <li><%= note  %></li>
       <% end %>
       </ul>
     </div>
-  <% end %>
+
 
   <div class="field">
     <%= f.label :note %><br>
@@ -14,4 +14,4 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  <% end %>

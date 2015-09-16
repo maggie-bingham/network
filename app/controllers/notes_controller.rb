@@ -44,9 +44,9 @@ class NotesController < ApplicationController
    end
 
    def destroy
-     @note.destroy
+     @note = Note.find(params[:id])
       respond_to do |format|
-        format.html { redirect_to user_url, notice: 'Topic was successfully destroyed.' }
+        format.html { redirect_to user_url, notice: 'Note was successfully destroyed.' }
         format.json { head :no_content }
     end
   end
@@ -55,7 +55,7 @@ class NotesController < ApplicationController
 
    private
 
-   def set_gif
+   def set_note
       @note = Note.find(params[:id])
     end
 
