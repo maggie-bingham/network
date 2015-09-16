@@ -1,6 +1,7 @@
 <% if current_user %>
 <div class="container">
   <section id="default" class="wrapper wrapper-default wrapper-md">
+<header class="jumbotron hero-spacer">
     <div class="container">
       <div class="row">
         <div class="col-md-2 col-md-offset-5 col-xs-6 col-xs-offset-3">
@@ -10,12 +11,15 @@
       <div class="row">
         <div class="col-md-10 col-md-offset-1 text-center">
           <h2><%= current_user.name %> - <%= current_user.title %></h2>
-          <p class="lead"> <%= link_to "Events Nearby", events_path %> | <%= link_to "People You've Met", user_index_path %> | <%= link_to "Noted People", noted_path %></p>
+          <p class="lead"> <%= link_to "Events Nearby", events_path %> | <%= link_to "People You've Met", user_index_path %> | <%= link_to "Note Taken", noted_path %></p>
         </div>
       </div>
     </div>
+  </header>
   </section>
+</div>
 <hr>
+<div class="container">
   <div class="row">
     <div class="col-lg-12">
       <h3>Events you plan on attending:</h3>
