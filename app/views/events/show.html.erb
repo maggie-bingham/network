@@ -1,3 +1,5 @@
+<%= render :partial =>'shared/navbar' %>
+
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
@@ -71,10 +73,9 @@
                         Notes</button>
                     </div>
                   </div>
+                </div>
                   <%= render :partial =>'shared/modal', :locals => {:user => user.id} %>
               <% end %>
-              <% end %>
-            </div>
-
     </div>
 </div>
+<% end %>

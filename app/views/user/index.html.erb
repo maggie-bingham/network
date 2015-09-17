@@ -1,21 +1,25 @@
+<%= render :partial =>'shared/navbar' %>
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h2 class="page-header">People You've Met</h2>
-    </div>
-    <% if current_user.all_following.empty? %>
-    <p>You haven't met anyone yet - checkout <strong><%= link_to "New Connections", search_path %></strong> to see who you should be networking with <em>or</em> head over to <strong><%= link_to "Events", events_path %></strong> to checkout local events</p>
-    <% else %>
-    <div class="col-lg-4 col-sm-6 text-center">
-      <% current_user.all_following.each_slice(3) do |row| %>
-      <% row.each do |user| %>
-      <img class="img-circle img-responsive img-center" src= "<%= user.image_url %>" alt="">
-        <h3><span class="glyphicon glyphicon-ok"></span><%= link_to user.name, user_path(user[:id]) %>
+  <div class="col-lg-12">
+    <h2 class="page-header">People You've Met</h2>
+  </div>
+
+  <% if current_user.all_following.empty? %>
+  <p>You haven't met anyone yet - head over to <strong><%= link_to "Events", events_path %></strong> for events happening nearby</p>
+  <% else %>
+
+  <% current_user.all_following.each_slice(3) do |row| %>
+
+<div class="row">
+  <% row.each do |user| %>
+  <div class="col-lg-4 col-sm-6 text-center">
+      <img class="img-circle" src= "<%= user.image_url %>" alt="">
+        <h3><%= link_to user.name, user_path(user[:id]) %>
           <br><small><%= user.company%> - <%= user.title %></small>
         </h3>
-    </div>
-    <% end %>
-    <% end %>
-    <% end %>
   </div>
+  <% end %>
+  <% end %>
+  <% end %>
+</div>
 </div>

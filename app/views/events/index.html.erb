@@ -1,3 +1,4 @@
+<%= render :partial =>'shared/navbar' %>
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
@@ -13,19 +14,21 @@
 
         <img class="img-responsive" src='<%= event.image_url %>' alt=""></br>
 
-        <h3><%= link_to event.group_name, event_path(event)%></h3>
+        <h3 class="name-center"><%= link_to event.group_name, event_path(event)%></h3>
         <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
         <p><%= strip_tags(event.description).truncate(200) %></p>
-          <div class="btn btn-default">
+        <div class="text-center">
+          <div class="btn btn-default button-color">
           <% if event.users.include? current_user %>
-            <%= link_to "Unattend", unattend_event_path(event.id), method: :post %>
+            <%= link_to "UNATTEND", unattend_event_path(event.id), method: :post %>
           <% else %>
-            <%= link_to "Attend", attend_event_path(event.id), method: :post %>
+            <%= link_to "ATTEND", attend_event_path(event.id), method: :post %>
           <% end %>
           </div>
-            <div class="btn btn-default">
+            <div class="btn btn-default button-color">
               <%= link_to "MORE INFO", event_path(event["id"])%>
             </div>
+          </div>
       </div>
       <% end %>
   </div></br>

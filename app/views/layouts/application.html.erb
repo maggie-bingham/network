@@ -17,31 +17,7 @@
 </head>
 
 <body<%= current_user ? " id='user-#{current_user.id}'".html_safe : " id='welcome'".html_safe %>>
-<% if current_user %>
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-        <p class="navbar-brand"><%= link_to "BusinessConnect", root_path %></p>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li><%= link_to "Events", events_path %></li>
-        <li><%= link_to "Connections", user_index_path %></li>
-        <li><%= link_to "Notes Taken", noted_path %></li>
-        <li><%= link_to "New Connections", search_path %></li>
-        <li><%= link_to "Logout", logout_path, :method => :delete %></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-<% else %>
-<% end %>
+
 
     <%= yield %>
   </body>

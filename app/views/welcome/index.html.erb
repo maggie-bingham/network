@@ -1,35 +1,25 @@
 <% if current_user %>
-<div class="container">
-  <section id="default" class="wrapper wrapper-default wrapper-md">
-<header class="jumbotron hero-spacer other-color">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2 col-md-offset-5 col-xs-6 col-xs-offset-3">
-          <img src="<%= current_user.image_url %>" class="img-responsive img-circle text-center"  alt="alternative image txt"/>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1 text-center">
-          <h2><%= current_user.name %> - <%= current_user.title %></h2>
-          <p class="lead"> <%= link_to "Events Nearby", events_path %> | <%= link_to "People You've Met", user_index_path %> | <%= link_to "Note Taken", noted_path %></p>
-        </div>
-      </div>
-    </div>
-  </header>
-  </section>
-</div>
-<hr>
-<div class="container">
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="2">
+		<h1 id="logo" class="text-center">
+			<img class="img-circle" src="<%= current_user.image_url %>" alt="">
+			<span class="title"><%=current_user.name%></span>
+			<span class="tagline"><%=current_user.title%><br>
+			<span class="tagline"><%=current_user.company%></span>
+		</h1>
+	</div>
+<%= render :partial =>'shared/navbar' %>
+</header>
+
+<div class="container" style="z-index: -1">
   <div class="row">
     <div class="col-lg-12">
       <h3>Events you plan on attending:</h3>
     </div>
-  </div>
-
-  <% if @user.events.empty? %>
+  </div>  <% if @user.events.empty? %>
   <p>You don't have any upcoming events - checkout <strong><%= link_to "Local Events", events_path %></strong> to see what you are missing out on!</p>
   <% else %>
-  <% @user.events.each_slice(4) do |row| %>
+  <% @user.events.sort {|a,b| a.date <=> b.date}.each_slice(4) do |row| %>
   <div class="row text-center">
     <% row.each do |event| %>
     <div class="col-md-3 col-sm-6 hero-feature">
@@ -38,14 +28,14 @@
           <div class="caption">
             <h3><%= link_to event.group_name, event_path(event[:id]) %></h3>
             <p><%= event.date.strftime("%B %d, %Y %I:%M %p") %></p>
-            <div class="btn btn-default">
+            <div class="btn btn-default button-color2">
             <% if event.users.include? current_user %>
-              <%= link_to "Unattend", unattend_event_path(event.id), method: :post %>
+              <%= link_to "UNATTEND", unattend_event_path(event.id), method: :post %>
             <% else %>
-              <%= link_to "Attend", attend_event_path(event.id), method: :post %>
+              <%= link_to "ATTEND", attend_event_path(event.id), method: :post %>
             <% end %>
             </div>
-              <div class="btn btn-default">
+              <div class="btn btn-default button-color2">
                 <%= link_to "MORE INFO", event_path(event["id"])%>
               </div>
           </div>

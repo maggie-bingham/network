@@ -1,43 +1,45 @@
-<section>
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="2">
+		<h1 id="logo" class="text-center">
+			<img class="img-circle" src="<%= @user.image_url %>" alt="">
+			<span class="title"><%=@user.name%></span>
+			<span class="tagline"><%=@user.title%><br>
+			<span class="tagline"><%=@user.company%></span><br>
 
-<div class="container">
-  <header class="jumbotron hero-spacer centersize other-color">
-      <img class="img-responsive img-center" style="height: 175px" src="<%= @user.image_url %>" alt="">
-    <h1><%= @user.name %></h1>
-    <p><%= @user.title %> - <%= @user.company %> - <%= @user.email %></p>
-    <p>
-      <div class="btn btn-primary btn-large">
-      <% if current_user.following?(@user) %>
-        <%= link_to "Remove", unfollow_user_path, method: :post %>
-      <% else %>
-        <%= link_to "We Met", follow_user_path, method: :post %>
-      <% end %>
-    </div>
-    </p>
-</header>
+<div class="meeting">
+			<% if current_user.following?(@user) %>
+			<strong>We've Met</strong> | <%= link_to "Haven't Met", unfollow_user_path(@user), class: "link-shaded", method: :post %>
+			<% else %>
+			<%= link_to "We've Met", follow_user_path(@user), class: "link-shaded", method: :post %> | <strong>Haven't Met</strong>
+			<% end %>
 </div>
 
-  <div class="container">
-    <div class="col-md-12">
-      <div class="col-md-9 col-md-offset-1 col-sm-6 hero-feature">
-        <h2>Notes:</h2>
-        <div class="caption col-md-offset-2">
-          <% current_user.notes_for_user(@user).each do |note| %>
-            <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "delete", note_path(note), method: :delete %></p>
-          <%end%>
-        </div>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-<%= @user.id %>">Add a Note</button>
-        <%= render :partial =>'shared/modal', :locals => {:user => @user.id} %>
+		</h1>
+	</div>
+  <%= render :partial =>'shared/navbar' %>
+</header>
+
+<div="container">
+	<div class="col-md-12">
+    <div class="col-md-9 col-md-offset-1 col-sm-6 hero-feature">
+      <h2>Notes:</h2>
+      <div class="caption col-md-offset-2">
+        <% current_user.notes_for_user(@user).each do |note| %>
+          <p><strong><%= note.body %></strong><br><%= note.created_at.strftime("%B %d, %Y") %> | <%= link_to "delete", note_path(note), method: :delete %></p>
+        <%end%>
       </div>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal-<%= @user.id %>">Add a Note</button>
+      <%= render :partial =>'shared/modal', :locals => {:user => @user.id} %>
     </div>
   </div>
+</div>
 
 <hr>
 
     <div class="container">
       <h3>Events <%= @user.name %> is attending:</h3>
       <% if @user.events %>
-        <% @user.events.each_slice(4) do |row| %>
+        <% @user.events.sort {|a,b| a.date <=> b.date}.each_slice(4) do |row| %>
         <div class="row text-center">
           <% row.each do |event| %>
           <div class="col-md-3 col-sm-6 hero-feature">
@@ -64,5 +66,3 @@
         <% end %>
       <% end %>
     </div>
-
-</section>

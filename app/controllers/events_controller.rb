@@ -49,13 +49,13 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     @event.users << current_user
     @event.save!
-      redirect_to @event
+      redirect_to :back
   end
 
   def unattend
     @event = Event.find(params[:id])
     @event.users.delete(current_user)
-    redirect_to root_path
+    redirect_to :back
   end
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
